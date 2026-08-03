@@ -17,7 +17,7 @@ public class DrinkDAO {
 public List<Drink> findAll() {
 	
 		
-		String sql = "select o from Bill o";
+		String sql = "select o from Drink o";
 		TypedQuery<Drink> query = em.createQuery(sql,Drink.class);
 		List<Drink> list = query.getResultList();
 		return list;
