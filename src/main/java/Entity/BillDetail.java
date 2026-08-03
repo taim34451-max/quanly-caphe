@@ -13,8 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Getter
 @Setter
 @Entity
@@ -22,7 +21,7 @@ import lombok.Setter;
 public class BillDetail {
 	@Id
 	@Column(name = "IDBillDetail")
-	int IDBillDetail;
+	String IDBillDetail;
 	@Column(name = "Price")
 	float Price;
 	@Column(name = "Quantity")
@@ -34,13 +33,13 @@ public class BillDetail {
 	/**
 	 * @return the iDBillDetail
 	 */
-	public int getIDBillDetail() {
+	public String getIDBillDetail() {
 		return IDBillDetail;
 	}
 	/**
 	 * @param iDBillDetail the iDBillDetail to set
 	 */
-	public void setIDBillDetail(int iDBillDetail) {
+	public void setIDBillDetail(String iDBillDetail) {
 		IDBillDetail = iDBillDetail;
 	}
 	/**
@@ -91,7 +90,7 @@ public class BillDetail {
 	public void setDrink(Drink drink) {
 		Drinks = drink;
 	}
-	public BillDetail(int iDBillDetail, float price, int quantity, Bill bills, Drink drinks) {
+	public BillDetail(String iDBillDetail, float price, int quantity, Bill bills, Drink drinks) {
 		super();
 		IDBillDetail = iDBillDetail;
 		Price = price;

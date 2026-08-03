@@ -14,8 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Getter
 @Setter
 @Entity
@@ -23,7 +22,7 @@ import lombok.Setter;
 public class Users {
 	@Id
 	@Column(name = "IDUser")
-	int IDUser;
+	String IDUser;
 	@Column(name = "UserName")
 	String UserName;
 	@Column(name = "UserPass")
@@ -39,13 +38,13 @@ public class Users {
 	/**
 	 * @return the iDUser
 	 */
-	public int getIDUser() {
+	public String getIDUser() {
 		return IDUser;
 	}
 	/**
 	 * @param iDUser the iDUser to set
 	 */
-	public void setIDUser(int iDUser) {
+	public void setIDUser(String iDUser) {
 		IDUser = iDUser;
 	}
 	/**
@@ -120,7 +119,7 @@ public class Users {
 	public void setBills(List<Bill> bills) {
 		this.bills = bills;
 	}
-	public Users(int iDUser, String userName, String userPass, String userPhone, String userEmail, int role,
+	public Users(String iDUser, String userName, String userPass, String userPhone, String userEmail, int role,
 			List<Bill> bills) {
 		super();
 		IDUser = iDUser;

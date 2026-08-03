@@ -12,8 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Getter
 @Setter
 @Entity
@@ -21,7 +20,7 @@ import lombok.Setter;
 public class Category{
 	@Id
 	@Column(name = "IDCate")
-	int IDCate;
+	String IDCate;
 	@Column(name = "Catename")
 	String Catename;
 	@Column(name = "Catetype")
@@ -31,13 +30,13 @@ public class Category{
 	/**
 	 * @return the iDCate
 	 */
-	public int getIDCate() {
+	public String getIDCate() {
 		return IDCate;
 	}
 	/**
 	 * @param iDCate the iDCate to set
 	 */
-	public void setIDCate(int iDCate) {
+	public void setIDCate(String iDCate) {
 		IDCate = iDCate;
 	}
 	/**
@@ -76,7 +75,7 @@ public class Category{
 	public void setDrinks(List<Drink> drinks) {
 		this.drinks = drinks;
 	}
-	public Category(int iDCate, String catename, String catetype, List<Drink> drinks) {
+	public Category(String iDCate, String catename, String catetype, List<Drink> drinks) {
 		super();
 		IDCate = iDCate;
 		Catename = catename;

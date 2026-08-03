@@ -24,7 +24,7 @@ import lombok.Setter;
 public class Bill {
 	@Id
 	@Column(name = "IdBill")
-	int IdBill;
+	String IdBill;
 	@Column(name = "CreatedDate")
 	Date CreatedDate;
 	@Column(name = "Total")
@@ -38,13 +38,13 @@ public class Bill {
 	/**
 	 * @return the idBill
 	 */
-	public int getIdBill() {
+	public String getIdBill() {
 		return IdBill;
 	}
 	/**
 	 * @param idBill the idBill to set
 	 */
-	public void setIdBill(int idBill) {
+	public void setIdBill(String idBill) {
 		IdBill = idBill;
 	}
 	/**

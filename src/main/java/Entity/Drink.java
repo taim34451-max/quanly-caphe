@@ -14,8 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Getter
 @Setter
 @Entity
@@ -23,7 +22,7 @@ import lombok.Setter;
 public class Drink {
 	@Id
 	@Column(name = "IDDrink")
-	int IDDrink;
+	String IDDrink;
 	@Column(name = "DrinkName")
 	String DrinkName;
 	@Column(name = "DrinkPrice")
@@ -41,13 +40,13 @@ public class Drink {
 	/**
 	 * @return the iDDrink
 	 */
-	public int getIDDrink() {
+	public String getIDDrink() {
 		return IDDrink;
 	}
 	/**
 	 * @param iDDrink the iDDrink to set
 	 */
-	public void setIDDrink(int iDDrink) {
+	public void setIDDrink(String iDDrink) {
 		IDDrink = iDDrink;
 	}
 	/**
@@ -135,7 +134,7 @@ public class Drink {
 		BillDetails = billDetail;
 	}
 
-	public Drink(int iDDrink, String drinkName, int drinkPrice, String drinkIMG, boolean drinkActive,
+	public Drink(String iDDrink, String drinkName, int drinkPrice, String drinkIMG, boolean drinkActive,
 			String drinkDescription, Category cate, List<BillDetail> billDetails) {
 		super();
 		IDDrink = iDDrink;

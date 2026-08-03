@@ -20,8 +20,9 @@ public class UserDAO {
 		return list;
 	}
 	
-	public Users FindByID(int id) {
+	public Users FindByID(String id) {
 		Users users = em.find(Users.class, id);
+		System.out.println(users);
 		return users;
 	}
 	
