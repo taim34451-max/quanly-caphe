@@ -33,7 +33,7 @@ public class dang_nhap extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("/User/dangnhap.jsp").forward(request, response);
+		request.getRequestDispatcher("/User/dang-nhap.jsp").forward(request, response);
 		
 	}
 
@@ -54,9 +54,10 @@ public class dang_nhap extends HttpServlet {
 			
 			
 			if(u.getUserPass().equals(password)) {
-				
-				AuthUtil.getUser(request);
-				request.getRequestDispatcher("/User/Index.jsp").forward(request, response);
+				System.out.println("OK");
+				AuthUtil.setUser(request, u);
+				request.getRequestDispatcher("//trang-chu.jsp").forward(request, response);
+	
 			}
 			doGet(request, response);
 			}

@@ -3,6 +3,11 @@
   <groupId>PolyCoffee</groupId>
   <artifactId>PolyCoffee</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.release>21</maven.compiler.release>
+</properties>
   <packaging>war</packaging>
   <build>
     <plugins>

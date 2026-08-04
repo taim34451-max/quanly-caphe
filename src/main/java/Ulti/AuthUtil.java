@@ -15,11 +15,10 @@ public class AuthUtil {
 	}
 	
 	
-	@SuppressWarnings("null")
 	public static Users getUser(HttpServletRequest req) {
 		
 		HttpSession session = req.getSession();
-		if(session!=null) return null;
+		if(session==null) return null;
 		return (Users) session.getAttribute(SESSION_USER);
 	}
 	
@@ -28,9 +27,9 @@ public class AuthUtil {
 		return getUser(req) != null;		
 	}
 	
-	public static Integer isManager(HttpServletRequest req) {
+	public static boolean isManager(HttpServletRequest req) {
 		Users u = getUser(req);
-		return u.isRole()!= 3 ? u.isRole() :null ;
+		return u.isRole()!= 3 ? true : false ;
 	}
 	
 	public static void clear(HttpServletRequest req) {
