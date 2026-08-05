@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.oe.entity.share"/>
+    <fullyQualifiedTypeName name="com.oe.entity.user"/>
+    <fullyQualifiedTypeName name="com.oe.entity.video"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.TypedQuery"/>
+    <fullyQualifiedTypeName name="java.nio.file.DirectoryStream.Filter"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,23 @@
+package utils;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DBConnection {
+
+    // Chuỗi kết nối SQLEXPRESS
+    private static final String URL = "jdbc:sqlserver://localhost;instanceName=SQLEXPRESS01;databaseName=PolyCoffee;encrypt=false;trustServerCertificate=true;";
+    private static final String USER = "sa";
+    private static final String PASSWORD = "123456"; // 👈 SỬA THÀNH MẬT KHẨU SA SQL SERVER CỦA MÁY BẠN
+
+    public static Connection getConnection() {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            return DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (Exception e) {
+            System.err.println("❌ LỖI KẾT NỐI DATABASE POLYCOFFEE: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+}

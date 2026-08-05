@@ -1,0 +1,36 @@
+package controller;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import dao.OrderDAO;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import model.Order;
+@WebServlet(urlPatterns = "/barista/orders")
+public class OrderListServlet extends HttpServlet {
+    private final OrderDAO orderDAO = new OrderDAO();
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        String status = request.getParameter("status");
+        if (status == null || status.trim().isEmpty()) {
+            status = "ALL";
+        }
+        status = status.toUpperCase().trim();
+       
+        List<Order> orders = orderDAO.getOrdersByStatus(status);
+        request.setAttribute("orders", orders);
+        request.setAttribute("currentStatus", status);
+       
+        Map<String, Integer> counts = orderDAO.getStatusCounts();
+        request.setAttribute("counts", counts);
+       
+        request.getRequestDispatcher("/views/barista/order-list.jsp").forward(request, response);
+    }
+}

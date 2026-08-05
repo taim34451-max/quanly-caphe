@@ -1,0 +1,67 @@
+package model;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+public class Order {
+    private int id;
+    private String customerName;
+    private String tableNumber;
+    private String status;
+    private double totalPrice;
+    private Date createdAt;
+    private String reason;
+    private String note;
+    private List<OrderItem> items;
+
+    public Order() {}
+
+    public Order(int id, String customerName, String tableNumber, String status, double totalPrice, Date createdAt) {
+        this.id = id;
+        this.customerName = customerName;
+        this.tableNumber = tableNumber;
+        this.status = status;
+        this.totalPrice = totalPrice;
+        this.createdAt = createdAt;
+    }
+
+    // --- Getters & Setters ---
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public String getCustomerName() { return customerName; }
+    public void setCustomerName(String customerName) { this.customerName = customerName; }
+
+    public String getTableNumber() { return tableNumber; }
+    public void setTableNumber(String tableNumber) { this.tableNumber = tableNumber; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
+    public double getTotalPrice() { return totalPrice; }
+    public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
+
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+
+    public String getReason() { return reason; }
+    public void setReason(String reason) { this.reason = reason; }
+
+    public String getNote() { return note != null ? note : (reason != null ? reason : ""); }
+    public void setNote(String note) { this.note = note; }
+
+    public List<OrderItem> getItems() { return items; }
+    public void setItems(List<OrderItem> items) { this.items = items; }
+
+    // --- Phương thức định dạng thời gian hỗ trợ API ---
+    public String getFormattedCreatedAt() {
+        if (createdAt == null) return "";
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(createdAt);
+    }
+
+    public String getFormattedTimeOnly() {
+        if (createdAt == null) return "";
+        return new SimpleDateFormat("HH:mm:ss").format(createdAt);
+    }
+}

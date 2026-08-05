@@ -1,0 +1,4 @@
+127.0.0.1 - - [03/Aug/2026:13:45:06 +0700] "GET / HTTP/1.1" 404 752
+127.0.0.1 - - [03/Aug/2026:13:45:06 +0700] "GET /CoffeeShopDemo/ HTTP/1.1" 302 -
+127.0.0.1 - - [03/Aug/2026:13:45:06 +0700] "GET /CoffeeShopDemo/coffee/coffee.jsp HTTP/1.1" 200 861
+127.0.0.1 - - [03/Aug/2026:13:45:07 +0700] "GET /favicon.ico HTTP/1.1" 404 763

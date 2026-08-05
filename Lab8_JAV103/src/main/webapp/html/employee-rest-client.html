@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 08 - Bài 4: Quản lý Nhân viên (REST Client)</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f9f9f9; }
+        .container { display: flex; gap: 30px; }
+        .form-box { flex: 1; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .table-box { flex: 1.5; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; }
+        .form-group input[type="text"], .form-group input[type="number"] { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        .btn-group { margin-top: 20px; display: flex; gap: 10px; }
+        button { padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-create { background-color: #28a745; color: white; }
+        .btn-update { background-color: #ffc107; color: black; }
+        .btn-delete { background-color: #dc3545; color: white; }
+        .btn-reset { background-color: #6c757d; color: white; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .btn-edit { background-color: #17a2b8; color: white; padding: 3px 8px; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+    <h2>Ứng dụng Quản lý Nhân viên (RESTful API Client)</h2>
+    <hr><br>
+
+    <div class="container">
+        <div class="form-box">
+            <h3>Thông tin nhân viên</h3>
+            <div class="form-group">
+                <label for="id">Mã nhân viên:</label>
+                <input type="text" id="id" placeholder="Nhập mã nhân viên...">
+            </div>
+            <div class="form-group">
+                <label for="name">Họ và tên:</label>
+                <input type="text" id="name" name="name" id="name" placeholder="Nhập họ tên...">
+            </div>
+            <div class="form-group">
+                <label>Giới tính:</label>
+                <input type="radio" id="genderNam" name="gender" value="true" checked> <label style="display:inline; font-weight:normal;" for="genderNam">Nam</label>
+                <input type="radio" id="genderNu" name="gender" value="false"> <label style="display:inline; font-weight:normal;" for="genderNu">Nữ</label>
+            </div>
+            <div class="form-group">
+                <label for="salary">Lương:</label>
+                <input type="number" id="salary" placeholder="Nhập mức lương...">
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-create" onclick="app.create()">Thêm</button>
+                <button class="btn-update" onclick="app.update()">Sửa</button>
+                <button class="btn-delete" onclick="app.delete()">Xóa</button>
+                <button class="btn-reset" onclick="app.reset()">Mới</button>
+            </div>
+        </div>
+
+        <div class="table-box">
+            <h3>Danh sách nhân viên</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã NV</th>
+                        <th>Họ tên</th>
+                        <th>Giới tính</th>
+                        <th>Lương ($)</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Đường dẫn API tương ứng với dự án Lab8_JAV103 của bro
+        const url = '../employees';
+
+        const app = {
+            // 1. Tải tất cả dữ liệu nhân viên về (GET)
+            loadAll() {
+                fetch(url, { method: "GET" })
+                .then(resp => {
+                    if (!resp.ok) throw new Error("Không thể tải dữ liệu");
+                    return resp.json();
+                })
+                .then(employees => {
+                    this.fillToTable(employees);
+                })
+                .catch(err => console.error("Lỗi loadAll:", err));
+            },
+
+            // 2. Điền dữ liệu vào bảng HTML
+            fillToTable(employees) {
+                const tbody = document.getElementById("tbody");
+                tbody.innerHTML = ""; // Xóa dữ liệu cũ
+                
+                employees.forEach(emp => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${emp.id}</td>
+                        <td>${emp.name}</td>
+                        <td>${emp.gender ? 'Nam' : 'Nữ'}</td>
+                        <td>${emp.salary}</td>
+                        <td>
+                            <button class="btn-edit" onclick="app.edit('${emp.id}')">Sửa</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            },
+
+            // 3. Đọc dữ liệu từ Form chuyển đổi sang JavaScript Object
+            getForm() {
+                return {
+                    id: document.getElementById("id").value,
+                    name: document.getElementById("name").value,
+                    gender: document.getElementById("genderNam").checked,
+                    salary: parseFloat(document.getElementById("salary").value) || 0
+                };
+            },
+
+            // 4. Đưa thông tin đối tượng lên các ô nhập liệu của Form
+            setForm(employee) {
+                document.getElementById("id").value = employee.id || "";
+                document.getElementById("name").value = employee.name || "";
+                if (employee.gender) {
+                    document.getElementById("genderNam").checked = true;
+                } else {
+                    document.getElementById("genderNu").checked = true;
+                }
+                document.getElementById("salary").value = employee.salary || 0;
+            },
+
+            // 5. Thêm mới nhân viên (POST)
+            create() {
+                var data = this.getForm();
+                fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                })
+                .then(resp => resp.json())
+                .then(json => {
+                    this.loadAll(); // Nạp lại bảng dữ liệu mới
+                    this.reset();   // Xóa sạch form
+                })
+                .catch(err => console.error("Lỗi create:", err));
+            },
+
+            // 6. Cập nhật nhân viên theo ID (PUT)
+            update() {
+                var data = this.getForm();
+                fetch(`${url}/${data.id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                })
+                .then(resp => resp.json())
+                .then(json => {
+                    this.loadAll(); // Nạp lại bảng dữ liệu
+                })
+                .catch(err => console.error("Lỗi update:", err));
+            },
+
+            // 7. Xóa nhân viên theo ID (DELETE)
+            delete() {
+                var id = document.getElementById("id").value;
+                fetch(`${url}/${id}`, { method: "DELETE" })
+                .then(resp => resp.json())
+                .then(json => {
+                    this.loadAll(); // Nạp lại bảng
+                    this.reset();   // Xóa form
+                })
+                .catch(err => console.error("Lỗi delete:", err));
+            },
+
+            // 8. Đặt lại form về trạng thái trống ban đầu
+            reset() {
+                var employee = { id: "", name: "", salary: 0, gender: true };
+                this.setForm(employee);
+            },
+
+            // 9. Nút sửa trên bảng: Gọi API lấy chi tiết 1 nhân viên rồi nạp lên form
+            edit(id) {
+                fetch(`${url}/${id}`, { method: "GET" })
+                .then(resp => resp.json())
+                .then(employee => {
+                    this.setForm(employee);
+                })
+                .catch(err => console.error("Lỗi edit:", err));
+            }
+        };
+
+        // Khi trang web load xong, tự động gọi nạp danh sách lên bảng ngay lập tức
+        document.addEventListener("DOMContentLoaded", () => {
+            app.loadAll();
+        });
+    </script>
+</body>
+</html>

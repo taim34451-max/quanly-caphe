@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="wizardPage">
+		<list key="groupId">
+			<item value="CoffeeBarista"/>
+			<item value="BV_JAV103"/>
+			<item value="Lab7_JAV103"/>
+			<item value="Lab6_JAV103"/>
+			<item value="Lab5_JAV103"/>
+			<item value="Lab5_Bai2_JAV103"/>
+			<item value="Lab6_Bai1_JAV103"/>
+			<item value="Lab5_Bai1_JAV103"/>
+			<item value="demo"/>
+			<item value="PS47934_OnlineEntertainment"/>
+		</list>
+		<list key="name">
+			<item value="com.poly"/>
+			<item value="com.ThanhTai.Jav103"/>
+		</list>
+		<list key="artifactId">
+			<item value="CoffeeBarista"/>
+			<item value="BV_JAV103"/>
+			<item value="Lab7_JAV103"/>
+			<item value="Lab6_JAV103"/>
+			<item value="Lab5_JAV103"/>
+			<item value="Lab5_Bai2_JAV103"/>
+			<item value="Lab6_Bai1_JAV103"/>
+			<item value="Lab5_Bai1_JAV103"/>
+			<item value="demo"/>
+			<item value="PS47934_OnlineEntertainment"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="D:\Summer2026(HK3)\block2\quanly-caphe\CoffeeShopDemo"/>
+			<item value="D:\Summer2026(HK3)\block2\eshop_final"/>
+			<item value="C:\Users\taim3\Downloads\eshop (1)"/>
+			<item value="D:\Summer2026(HK3)\block2\eshop"/>
+			<item value="D:\Summer2026(HK3)\block2\SD21301"/>
+			<item value="C:\Users\taim3\Downloads\JAV102_Test-main\JAV102_Test-main"/>
+			<item value="D:\Summer2026(HK3)\block2\JAV102 - Dự án Java 1\Du_an_java1"/>
+			<item value="D:\Eclipse_New\JAV103_LAB8"/>
+			<item value="D:\Eclipse_New\JAV103_LAB7"/>
+			<item value="C:\Users\taim3\Downloads\Lab7_JAV103"/>
+			<item value="C:\Users\taim3\Downloads\Lab7_JAV103\src\main\webapp\views\signin.jsp"/>
+			<item value="D:\Eclipse_New\Lab8_JAV103"/>
+			<item value="D:\Eclipse_New\Lab7_JAV103"/>
+			<item value="D:\Eclipse_New\Lab5_Bai1_JAV103"/>
+			<item value="D:\Eclipse_New\Lab2_Bai4_JAV103"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardLocationPage">
+		<list key="location">
+			<item value="D:\Eclipse_New\Lab5_Bai1_JAV103"/>
+			<item value="D:\Eclipse_New\Lab1_Bai2_JAV103"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArchetypePage">
+		<item key="catalog" value="All Catalogs"/>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="Maven2ProjectWizardArchifactPage">
+		<list key="package">
+			<item value="com.poly"/>
+			<item value="com.poly.Lab5_Bai1_JAV103"/>
+		</list>
+		<list key="groupId">
+			<item value="com.poly"/>
+		</list>
+		<list key="artifactId">
+			<item value="Lab5_Bai2_JAV103"/>
+			<item value="Lab5_Bai1_JAV103"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArtifactPage">
+		<list key="groupId">
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+</section>

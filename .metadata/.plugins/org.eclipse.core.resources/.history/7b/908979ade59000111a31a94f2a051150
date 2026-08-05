@@ -1,0 +1,25 @@
+package dao;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import model.Order; 
+
+public class OrderDAO {
+
+    public Map<String, Integer> getStatusCounts() {
+        Map<String, Integer> counts = new HashMap<>();
+        counts.put("PENDING", 0);
+        counts.put("MAKING", 0);
+        counts.put("COMPLETED", 0);
+        counts.put("CANCELLED", 0);
+        return counts;
+    }
+
+    public List<Order> getOrdersByStatus(String status) {
+        List<Order> orders = new ArrayList<>();
+        return orders;
+    }
+}

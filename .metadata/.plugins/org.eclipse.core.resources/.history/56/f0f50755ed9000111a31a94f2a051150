@@ -1,0 +1,168 @@
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pha chế đơn #${order.id} | Barista Hub</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/assets/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Component -->
+        <jsp:include page="/views/common/sidebar.jsp" />
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="header-panel">
+                <div>
+                    <h1 class="header-title">
+                        <a href="${pageContext.request.contextPath}/barista/dashboard" style="color: inherit; text-decoration: none;">
+                            <i class="fas fa-arrow-left" style="font-size: 1.3rem; margin-right: 0.5rem; color: var(--color-primary);"></i>
+                        </a>
+                        Chi Tiết Pha Chế - Đơn #${order.id}
+                    </h1>
+                    <p class="header-subtitle">Theo dõi chi tiết các món cần làm và cập nhật tiến độ pha chế thời gian thực.</p>
+                </div>
+            </div>
+
+            <!-- Detail Layout -->
+            <div class="detail-layout">
+                <!-- Left Column: Order Items & Main Action -->
+                <div class="detail-main">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h2 style="font-size: 1.25rem; font-weight: 700;">Danh sách món cần pha chế</h2>
+                        <span class="status-badge ${order.status.toLowerCase()}">
+                            <c:choose>
+                                <c:when test="${order.status == 'PENDING'}"><i class="fas fa-hourglass-start"></i> Đơn Mới</c:when>
+                                <c:when test="${order.status == 'MAKING'}"><i class="fas fa-sync fa-spin"></i> Đang Pha</c:when>
+                                <c:when test="${order.status == 'COMPLETED'}"><i class="fas fa-check-circle"></i> Hoàn Thành</c:when>
+                                <c:when test="${order.status == 'CANCELLED'}"><i class="fas fa-times-circle"></i> Đã Hủy</c:when>
+                            </c:choose>
+                        </span>
+                    </div>
+
+                    <!-- Info Strip -->
+                    <div class="info-strip">
+                        <div class="info-item">
+                            <span class="info-label">Số Bàn</span>
+                            <span class="info-value" style="color: var(--color-primary);">${order.tableNumber}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Khách Hàng</span>
+                            <span class="info-value">${order.customerName}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Giờ Đặt Hàng</span>
+                            <span class="info-value">${order.formattedCreatedAt}</span>
+                        </div>
+                    </div>
+
+                    <!-- Items Table -->
+                    <table class="detail-items-table">
+                        <thead>
+                            <tr>
+                                <th>Đồ Uống / Món Ăn</th>
+                                <th style="text-align: center;">Số Lượng</th>
+                                <th style="text-align: right;">Đơn Giá</th>
+                                <th style="text-align: right;">Thành Tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="item" items="${order.items}">
+                                <tr>
+                                    <td>
+                                        <div class="detail-item-title">${item.itemName}</div>
+                                        <c:if test="${not empty item.note}">
+                                            <div class="detail-item-note">
+                                                <span class="item-note" style="color: #fbbf24; background: rgba(251,191,36,0.08); padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid rgba(251,191,36,0.15); font-weight: 600; display: inline-block;">
+                                                    <i class="fas fa-exclamation-triangle"></i> Ghi chú: ${item.note}
+                                                </span>
+                                            </div>
+                                        </c:if>
+                                    </td>
+                                    <td style="text-align: center; font-weight: 800; font-size: 1.1rem; color: var(--color-primary);">
+                                        ${item.quantity}
+                                    </td>
+                                    <td style="text-align: right; color: var(--color-text-secondary);">
+                                        <fmt:formatNumber value="${item.price}" pattern="#,###" /> đ
+                                    </td>
+                                    <td style="text-align: right; font-weight: 700;">
+                                        <fmt:formatNumber value="${item.price * item.quantity}" pattern="#,###" /> đ
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            <!-- Total Row -->
+                            <tr>
+                                <td colspan="2" style="font-weight: 800; font-size: 1.1rem; border-bottom: none;">TỔNG CỘNG ĐƠN HÀNG:</td>
+                                <td colspan="2" style="text-align: right; font-weight: 800; font-size: 1.3rem; color: var(--color-primary); border-bottom: none;">
+                                    <fmt:formatNumber value="${order.totalPrice}" pattern="#,###" /> VNĐ
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Quick Finish Action -->
+                    <c:if test="${order.status == 'MAKING' || order.status == 'PENDING'}">
+                        <form action="${pageContext.request.contextPath}/barista/update-status" method="POST" style="margin-top: 2rem;">
+                            <input type="hidden" name="id" value="${order.id}">
+                            <input type="hidden" name="status" value="COMPLETED">
+                            <input type="hidden" name="note" value="Đã pha chế hoàn tất">
+                            <button type="submit" class="btn btn-success" style="width: 100%; padding: 1rem; justify-content: center; font-size: 1rem;">
+                                <i class="fas fa-check-double"></i> HOÀN THÀNH PHA CHẾ (Nhấn để hoàn tất đơn)
+                            </button>
+                        </form>
+                    </c:if>
+                </div>
+
+                <!-- Right Column: Countdown Box & Update Form -->
+                <div class="detail-sidebar-panel">
+                    <!-- Countdown Chime Box -->
+                    <c:choose>
+                        <c:when test="${order.status == 'PENDING' || order.status == 'MAKING'}">
+                            <div class="countdown-box" id="countdown-box">
+                                <div class="countdown-label"><i class="far fa-hourglass"></i> THỜI GIAN PHA CHẾ CÒN LẠI</div>
+                                <div class="countdown-timer" id="countdown-timer" data-created-at="${order.createdAt != null ? order.createdAt.time : 0}">10:00</div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-secondary); margin-top: 0.5rem;">
+                                    (Đếm ngược thời gian thực, tiêu chuẩn 10 phút)
+                                </div>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="countdown-box" style="border-color: var(--color-border); background: var(--bg-sidebar);">
+                                <div class="countdown-label">Đơn Hàng Đã Kết Thúc</div>
+                                <div class="countdown-timer" style="font-size: 2.2rem; color: var(--color-text-secondary);">
+                                    <c:choose>
+                                        <c:when test="${order.status == 'COMPLETED'}">HOÀN TẤT</c:when>
+                                        <c:when test="${order.status == 'CANCELLED'}">ĐÃ HỦY</c:when>
+                                    </c:choose>
+                                </div>
+                                <c:if test="${not empty order.note}">
+                                    <div style="font-size: 0.85rem; color: #fbbf24; margin-top: 0.5rem; font-style: italic;">
+                                        "${order.note}"
+                                    </div>
+                                </c:if>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <!-- Update Status Form Component -->
+                    <jsp:include page="update-status.jsp" />
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Inject Context Path cho JS -->
+    <script>
+        window.contextPath = '${pageContext.request.contextPath}';
+    </script>
+    <!-- Custom JS -->
+    <script src="${pageContext.request.contextPath}/views/assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 08 - Bài 1</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .instructions { padding: 10px; background-color: #f4f4f4; border-left: 4px solid #007bff; }
+    </style>
+</head>
+<body>
+    <h2>Kiểm tra kết quả Bài 1</h2>
+    
+    <div class="instructions">
+        <p><strong>Hướng dẫn xem kết quả:</strong></p>
+        <p>1. Nhấn phím <strong>F12</strong> (hoặc click chuột phải chọn <em>Inspect / Kiểm tra</em>).</p>
+        <p>2. Chuyển sang tab <strong>Console</strong>.</p>
+        <p>3. Bạn sẽ thấy đối tượng JSON được tải về từ Servlet hiển thị tại đó.</p>
+    </div>
+
+    <script>
+        // Gọi tới URL mapping của Servlet là '/bai1' bằng Fetch API 
+        fetch('/Lab8_JAV103/bai1')
+            .then(response => {
+                // Kiểm tra HTTP status code xem có thành công không
+                if (!response.ok) {
+                    throw new Error('Lỗi kết nối hoặc không tìm thấy Servlet!');
+                }
+                // Tự động parse chuỗi JSON trả về thành Object JavaScript
+                return response.json(); 
+            })
+            .then(data => {
+                // Xuất toàn bộ dữ liệu json ra console theo yêu cầu 
+                console.log("Dữ liệu JSON nhận được từ Servlet:");
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Đã xảy ra lỗi gọi Fetch API:', error);
+            });
+    </script>
+</body>
+</html>

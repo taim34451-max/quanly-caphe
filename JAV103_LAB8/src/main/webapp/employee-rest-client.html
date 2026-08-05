@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Employee Management - REST Consumer</title>
+    <style>
+        body { font-family: sans-serif; margin: 30px; }
+        .form-group { margin-bottom: 8px; }
+        input[type="text"], input[type="number"] { width: 200px; padding: 4px; }
+        button { padding: 5px 15px; margin-right: 5px; cursor: pointer; }
+        table { border-collapse: collapse; margin-top: 20px; width: 100%; }
+        th, td { padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h2>Quản Lý Nhân Viên (REST Client)</h2>
+    <div>
+        <div class="form-group"><input id="id" placeholder="Id?"></div>
+        <div class="form-group"><input id="name" placeholder="Name?"></div>
+        <div class="form-group">
+            <input type="radio" id="male" name="gender" checked> Male
+            <input type="radio" id="female" name="gender"> Female
+        </div>
+        <div class="form-group"><input id="salary" type="number" placeholder="Salary?"></div>
+        <hr>
+    </div>
+    
+    <button onclick="ctrl.create()">Create</button>
+    <button onclick="ctrl.update()">Update</button>
+    <button onclick="ctrl.remove()">Delete</button>  
+    <button onclick="ctrl.reset()">Reset</button>
+    
+    <hr>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th><th>Name</th><th>Gender</th><th>Salary</th><th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="list"></tbody>
+    </table>
+
+   <script>
+    var ctrl = {
+        setForm(employee) {
+            document.getElementById("id").value = employee.id || "";
+            document.getElementById("name").value = employee.name || "";
+            document.getElementById("salary").value = employee.salary || 0;
+            if (employee.gender) {
+                document.getElementById("male").checked = true;
+            } else {
+                document.getElementById("female").checked = true;
+            }
+            // Mở lại ô ID nếu đang bị khóa
+            document.getElementById("id").readOnly = false;
+        },
+
+        getForm() {
+            return {
+                id: document.getElementById("id").value,
+                name: document.getElementById("name").value,
+                gender: document.getElementById("male").checked,
+                salary: parseFloat(document.getElementById("salary").value) || 0
+            };
+        },
+
+        fillToTable(employees) {
+            var rows = [];
+            employees.forEach(e => {
+                if (e) {
+                    var row = `<tr>
+                        <td>${e.id}</td>
+                        <td>${e.name}</td>
+                        <td>${e.gender ? 'Male' : 'Female'}</td>
+                        <td>${e.salary}</td>
+                        <td><a href="javascript:ctrl.edit('${e.id}')">Edit</a></td>
+                    </tr>`;
+                    rows.push(row);
+                }
+            });
+            document.getElementById("list").innerHTML = rows.join('');
+        },
+
+        loadAll() {
+            // SỬA LỖI 1: Gọi thẳng 'employees' vì file HTML đang ở cùng cấp
+            fetch('employees', { method: "GET" })
+                .then(resp => resp.json())
+                .then(employees => this.fillToTable(employees))
+                .catch(err => console.error("Lỗi:", err));
+        },
+
+        create() {
+            var data = this.getForm();
+            if(!data.id) return alert("Vui lòng nhập ID!");
+
+            fetch('employees', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(resp => {
+                if(resp.ok) {
+                    alert("Thêm nhân viên thành công!");
+                    this.loadAll(); 
+                    this.reset();
+                } else {
+                    alert("Mã ID đã tồn tại hoặc lỗi máy chủ!");
+                }
+            })
+            .catch(err => console.error("Lỗi:", err));
+        },
+
+        update() {
+            var data = this.getForm();
+            if(!data.id) return alert("Vui lòng chọn nhân viên cần sửa!");
+
+            fetch(`employees/${data.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(resp => {
+                if(resp.ok) {
+                    alert("Cập nhật thành công!");
+                    this.loadAll();
+                    this.reset();
+                }
+            })
+            .catch(err => console.error("Lỗi:", err));
+        },
+
+        // SỬA LỖI 2: Đổi tên hàm từ delete() thành remove()
+        remove() {
+            var id = document.getElementById("id").value;
+            if (!id) return alert("Nhập ID cần xóa!");
+            
+            if(confirm("Xác nhận xóa nhân viên " + id + "?")) {
+                fetch(`employees/${id}`, { method: "DELETE" })
+                .then(resp => {
+                    if(resp.ok) {
+                        alert("Đã xóa nhân viên!");
+                        this.loadAll(); 
+                        this.reset();
+                    }
+                })
+                .catch(err => console.error("Lỗi:", err));
+            }
+        },
+
+        reset() {
+            this.setForm({ id: "", name: "", salary: 0, gender: true });
+        },
+
+        edit(id) {
+            fetch(`employees/${id}`, { method: "GET" })
+                .then(resp => resp.json())
+                .then(employee => {
+                    this.setForm(employee);
+                    // Khóa ID lại không cho đổi ID khi đang edit
+                    document.getElementById("id").readOnly = true; 
+                })
+                .catch(err => console.error("Lỗi:", err));
+        }
+    };
+
+    // Chạy hàm lấy dữ liệu khi vừa tải trang
+    ctrl.loadAll();
+</script>
+</body>
+</html>
