@@ -3,12 +3,12 @@ package Entity;
 import java.util.List;
 
 public class CartItem {
- Drink drink;
+ Product drink;
  int quantity;
- public Drink getDrink() {
+ public Product getDrink() {
 	return drink;
  }
- public void setDrink(Drink drink) {
+ public void setDrink(Product drink) {
 	this.drink = drink;
  }
  public int getQuantity() {
@@ -17,7 +17,7 @@ public class CartItem {
  public void setQuantity(int quantity) {
 	this.quantity = quantity;
  }
- public CartItem(Drink drink, int quantity) {
+ public CartItem(Product drink, int quantity) {
 	super();
 	this.drink = drink;
 	this.quantity = quantity;

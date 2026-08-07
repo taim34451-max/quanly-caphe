@@ -50,7 +50,7 @@ public class AuthFilter extends HttpFilter implements Filter {
 		String error = "";	
 		if(!AuthUtil.isAuthenticated(httpServReq)) {
 			error = "401";
-		} else if(AuthUtil.isManager(httpServReq)==3&& uriString.contains("/manager")) {
+		} else if(AuthUtil.isManager(httpServReq)&& uriString.contains("/manager")) {
 			error = "403";
 		}
 		if(!error.isEmpty()) {

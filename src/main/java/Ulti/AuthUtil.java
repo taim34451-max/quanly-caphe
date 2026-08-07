@@ -29,7 +29,7 @@ public class AuthUtil {
 	
 	public static boolean isManager(HttpServletRequest req) {
 		Users u = getUser(req);
-		return u.isRole()!= 3 ? true : false ;
+		return u.getRole()!= "MANAGER" ? true : false ;
 	}
 	
 	public static void clear(HttpServletRequest req) {

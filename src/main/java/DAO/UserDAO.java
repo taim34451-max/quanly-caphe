@@ -38,7 +38,7 @@ public class UserDAO {
 	}
 	
 	public void UpdateUser(Users u) {
-		Users exit = em.find(Users.class, u.getIDUser());
+		Users exit = em.find(Users.class, u.getUserId());
 		if (exit!=null) {
 			try {
 				em.getTransaction().begin();

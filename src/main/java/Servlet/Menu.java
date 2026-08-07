@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 import DAO.DrinkDAO;
-import Entity.Drink;
+import Entity.Product;
 
 /**
  * Servlet implementation class Menu
@@ -33,9 +33,9 @@ public class Menu extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		DrinkDAO drinkDAO = new DrinkDAO();
-		List<Drink> list = drinkDAO.findAll();
+		List<Product> list = drinkDAO.findAll();
 		request.setAttribute("listItem", list);
-		request.getRequestDispatcher("/User/Index.jsp").forward(request, response);
+		request.getRequestDispatcher("/thuc-don.jsp").forward(request, response);
 	}
 
 	/**

@@ -52,8 +52,8 @@ public class dang_nhap extends HttpServlet {
 			}else {
 			String password = request.getParameter("password");
 			
-			
-			if(u.getUserPass().equals(password)) {
+		
+			if(u.getPassword().equals(password)) {
 				System.out.println("OK");
 				AuthUtil.setUser(request, u);
 				request.getRequestDispatcher("//trang-chu.jsp").forward(request, response);

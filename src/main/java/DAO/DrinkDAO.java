@@ -2,7 +2,7 @@ package DAO;
 
 import java.util.List;
 
-import Entity.Drink;
+import Entity.Product;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -14,21 +14,21 @@ public class DrinkDAO {
 	EntityManagerFactory factory = Persistence.createEntityManagerFactory("PolyCoffee");
 	EntityManager em = factory.createEntityManager();
 	
-public List<Drink> findAll() {
+public List<Product> findAll() {
 	
 		
-		String sql = "select o from Drink o";
-		TypedQuery<Drink> query = em.createQuery(sql,Drink.class);
-		List<Drink> list = query.getResultList();
+		String sql = "select o from Product o";
+		System.out.println("OK");
+		TypedQuery<Product> query = em.createQuery(sql,Product.class);
+		List<Product> list = query.getResultList();
 		return list;
 	}
 	
-	public Drink FindByID(String id) {
-		Drink users = em.find(Drink.class, id);
-		return users;
+	public Product FindByID(int id) {
+		return em.find(Product.class, id);
 	}
 	
-	public void CreateBill(Drink u) {
+	public void CreateBill(Product u) {
 		try {
 			em.getTransaction().begin();
 			em.persist(u);
@@ -39,8 +39,8 @@ public List<Drink> findAll() {
 		}
 	}
 	
-	public void UpdateBill(Drink u) {
-		Drink exit = em.find(Drink.class, u.getIDDrink());
+	public void UpdateBill(Product u) {
+		Product exit = em.find(Product.class, u.getProductId());
 		if (exit!=null) {
 			try {
 				em.getTransaction().begin();
@@ -53,8 +53,8 @@ public List<Drink> findAll() {
 		}
 	}
 	
-	public void DeleteBill(String id) {
-		Drink exit = em.find(Drink.class, id);
+	public void DeleteBill(int id) {
+		Product exit = em.find(Product.class, id);
 		String sql = "delete from Bill o where o.users.iduser like :id";
 		String sql2 = "delete from BillDetail o where o.Bill.users.iduser like :id";
 		try {

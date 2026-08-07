@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <a href="trang-chu.jsp" class="back-home">← Quay lại Trang chủ</a>
+    <a href="${pageContext.request.contextPath}/trang-chu.jsp" class="back-home">← Quay lại Trang chủ</a>
 
     <div class="auth-container">
         <div class="form-box">
@@ -34,7 +34,7 @@
             </form>
             
             <p style="margin-top: 15px; font-size: 14px;">
-                Chưa có tài khoản? <a href="dang-ky.jsp" style="color: var(--dark-bg); text-decoration: none; font-weight: bold;">Đăng ký ngay</a>
+                Chưa có tài khoản? <a href="${pageContext.request.contextPath}/dang-ky.jsp" style="color: var(--dark-bg); text-decoration: none; font-weight: bold;">Đăng ký ngay</a>
             </p>
         </div>
     </div>

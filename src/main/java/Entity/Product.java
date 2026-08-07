@@ -1,0 +1,38 @@
+package Entity;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "Product")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Product {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ProductId")
+    private Integer productId;
+
+    @Column(name = "ProductName")
+    private String productName;
+
+    @Column(name = "Price",precision = 12,scale = 2)
+    private BigDecimal price;
+
+    @Column(name = "Category")
+    private String category;
+
+    @Column(name = "IsAvailable")
+    private Boolean isAvailable;
+
+    @Column(name = "ProductIMG")
+    private String productIMG;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<BillDetail> billDetails;
+}

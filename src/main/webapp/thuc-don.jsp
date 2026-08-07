@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include  file="NewFile.jsp"%>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -21,7 +22,7 @@
             <div class="logo">Highlands Coffee</div>
             <nav>
                 <a href="trang-chu.jsp">Trang chủ</a>
-                <a href="thuc-don.jsp" class="active">Thực đơn</a>
+                <a href="${ctx}/Menu" class="active">Thực đơn</a>
                 <a href="gio-hang.jsp">Giỏ hàng</a>
                 <span style="color: #fff; margin: 0 15px;">|</span>
                 <a href="dang-ky.jsp" style="color: var(--primary-color); font-weight: bold;">Đăng ký</a>
@@ -41,36 +42,55 @@
             <a href="#freeze" class="btn-filter">Đá Xay (Freeze)</a>
             <a href="#banh-mi" class="btn-filter">Bánh Mì & Snack</a>
         </div>
+        <div class="products">
+        <c:forEach var="u" items="${listItem}">
+        	<div class="item">
+        		<a href="chi-tiet-san-pham.jsp/${u.productId}" class="product-link">
+            	<img src="${ctx}/hinh-anh/imgs/${u.productId}.jpg" alt="Phindi Hạnh Nhân">
+            	<p>${u.productName}</p>
+            	<span class="new">${u.price}</span>
+            	</a>
+            </div>
+        </c:forEach>
+        </div>  
+        
+        
 
         <!-- DANH SÁCH SẢN PHẨM -->
-        <div class="products">
-            <!-- Nhóm Cà Phê (Lưu ý class "ca-phe") -->
-            <!-- 3 Món bổ sung thêm cho đủ -->
-            <div class="item ca-phe"><a href="chi-tiet-san-pham.jsp?id=1" class="product-link"><img src="hinh-anh/imgs/PHINDI_HANH_NHAN.jpg" alt="Phindi Hạnh Nhân"><p>Phindi Hạnh Nhân</p><span class="new">49.000đ</span></a></div>
+        <!-- <div class="products">
+            Nhóm Cà Phê (Lưu ý class "ca-phe")
+            3 Món bổ sung thêm cho đủ
+            <div class="item ca-phe">
+            	<a href="chi-tiet-san-pham.jsp?id=1" class="product-link">
+            	<img src="hinh-anh/imgs/PHINDI_HANH_NHAN.jpg" alt="Phindi Hạnh Nhân">
+            	<p>Phindi Hạnh Nhân</p>
+            	<span class="new">49.000đ</span>
+            	</a>
+            </div>
             <div class="item ca-phe"><a href="chi-tiet-san-pham.jsp?id=4" class="product-link"><img src="hinh-anh/imgs/PHIN_SUA_DA.jpg" alt="Cà Phê Sữa Đá"><p>Cà Phê Sữa Đá</p><span class="new">29.000đ</span></a></div>
             <div class="item ca-phe"><a href="chi-tiet-san-pham.jsp?id=8" class="product-link"><img src="hinh-anh/imgs/PHIN_SUA_NONG.jpg" alt="Phin Sữa Nóng"><p>Phin Sữa Nóng</p><span class="new">29.000đ</span></a></div>
             
-            <!-- Các món cũ bạn đã có -->
+            Các món cũ bạn đã có
             <div class="item ca-phe"><a href="chi-tiet-san-pham.jsp?id=5" class="product-link"><img src="hinh-anh/imgs/phin_sua_da.jpg" alt="Phin Sữa Đá"><p>Phin Sữa Đá</p><span class="new">29.000đ</span></a></div>
             <div class="item ca-phe"><a href="chi-tiet-san-pham.jsp?id=6" class="product-link"><img src="hinh-anh/imgs/phin_den_da.jpg" alt="Phin Đen Đá"><p>Phin Đen Đá</p><span class="new">29.000đ</span></a></div>
             <div class="item ca-phe"><a href="chi-tiet-san-pham.jsp?id=7" class="product-link"><img src="hinh-anh/imgs/bac_siu_1.jpg" alt="Bạc Xỉu Đá"><p>Bạc Xỉu Đá</p><span class="new">33.000đ</span></a></div>
             
-            <!-- Nhóm Trà (Lưu ý class "tra") -->
+            Nhóm Trà (Lưu ý class "tra")
             <div class="item tra"><a href="chi-tiet-san-pham.jsp?id=2" class="product-link"><img src="hinh-anh/imgs/tsv_cu_nang.jpg" alt="Trà Sen Vàng"><p>Trà Sen Vàng (Củ Năng)</p><span class="new">45.000đ</span></a></div>
             <div class="item tra"><a href="chi-tiet-san-pham.jsp?id=13" class="product-link"><img src="hinh-anh/imgs/tra_thanh_dao.jpg" alt="Trà Thanh Đào"><p>Trà Thanh Đào</p><span class="new">45.000đ</span></a></div>
             <div class="item tra"><a href="chi-tiet-san-pham.jsp?id=14" class="product-link"><img src="hinh-anh/imgs/TRA_THACH_VAI_1.jpg" alt="Trà Thạch Vải"><p>Trà Thạch Vải</p><span class="new">45.000đ</span></a></div>
             <div class="item tra"><a href="chi-tiet-san-pham.jsp?id=16" class="product-link"><img src="hinh-anh/imgs/TRA_XANH_DAU_DO.jpg" alt="Trà Xanh Đậu Đỏ"><p>Trà Xanh Đậu Đỏ</p><span class="new">45.000đ</span></a></div>
 
-            <!-- Nhóm Freeze (Lưu ý class "freeze") -->
+            Nhóm Freeze (Lưu ý class "freeze")
             <div class="item freeze"><a href="chi-tiet-san-pham.jsp?id=3" class="product-link"><div class="badge-hot">HOT</div><img src="hinh-anh/imgs/freeze_tra_xanh.jpg" alt="Freeze Trà Xanh"><p>Freeze Trà Xanh</p><span class="new">55.000đ</span></a></div>
             <div class="item freeze"><a href="chi-tiet-san-pham.jsp?id=15" class="product-link"><img src="hinh-anh/imgs/FREEZE_COOKIES.jpg" alt="Cookies & Cream"><p>Cookies & Cream</p><span class="new">55.000đ</span></a></div>
 
-            <!-- Nhóm Bánh (Lưu ý class "banh-mi") -->
+            Nhóm Bánh (Lưu ý class "banh-mi")
             <div class="item banh-mi"><a href="chi-tiet-san-pham.jsp?id=10" class="product-link"><img src="hinh-anh/imgs/bmq_ga.jpg" alt="Bánh Mì Que Gà"><p>Bánh Mì Que (Gà)</p><span class="new">19.000đ</span></a></div>
             <div class="item banh-mi"><a href="chi-tiet-san-pham.jsp?id=9" class="product-link"><img src="hinh-anh/imgs/banh_pho_mai_tra_xanh.jpg" alt="Bánh Phô Mai Trà Xanh"><p>Bánh Phô Mai Trà Xanh</p><span class="new">25.000đ</span></a></div>
             <div class="item banh-mi"><a href="chi-tiet-san-pham.jsp?id=11" class="product-link"><img src="hinh-anh/imgs/BANH_TIRAMISU.jpg" alt="Bánh Tiramisu"><p>Bánh Tiramisu</p><span class="old">39.000đ</span><span class="new">35.000đ</span></a></div>
             <div class="item banh-mi"><a href="chi-tiet-san-pham.jsp?id=12" class="product-link"><img src="hinh-anh/imgs/BANH_CHUOI.jpg" alt="Bánh Chuối"><p>Bánh Chuối</p><span class="old">32.000đ</span><span class="new">29.000đ</span></a></div>
-        </div>
+        </div> -->
     </section>
 
     <!-- FOOTER CHUẨN ĐỒNG BỘ -->

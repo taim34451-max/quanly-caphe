@@ -1,5 +1,6 @@
 package Entity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,9 +13,9 @@ public class Cart {
 		return items;
 	}
 	
-	public void addItem(Drink drink) {
+	public void addItem(Product drink) {
 		for(CartItem item: items) {
-			if(item.getDrink().getIDDrink().equals(drink)) {
+			if(item.getDrink().getProductId().equals(drink)) {
 				item.setQuantity(item.getQuantity()+1);
 				return;
 			}}
@@ -28,18 +29,18 @@ public class Cart {
 	
 	public void updateItem(String id,int qty) {
 		for (CartItem item : items) {
-			if(item.getDrink().getIDDrink().equals(id)) {
+			if(item.getDrink().getProductId().equals(id)) {
 				item.setQuantity(qty);
 			}
 		}
 	}
 	
 	
-	public double getTotal() {
-		double total = 0;
+	public BigDecimal getTotal() {
+		BigDecimal total = BigDecimal.ZERO;
 		for(CartItem item: items) {
-			total += (item.getDrink().getDrinkPrice())*(item.getQuantity());
+			total = total.add(item.getDrink().getPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
 		}
-		return total;
+		return  total;
 	}
 }

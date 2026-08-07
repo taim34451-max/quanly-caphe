@@ -37,7 +37,7 @@ public List<Bill> findAll() {
 	}
 	
 	public void UpdateBill(Bill u) {
-		Bill exit = em.find(Bill.class, u.getIdBill());
+		Bill exit = em.find(Bill.class, u.getBillId());
 		if (exit!=null) {
 			try {
 				em.getTransaction().begin();

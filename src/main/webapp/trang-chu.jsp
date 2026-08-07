@@ -18,22 +18,22 @@
             <nav id="main-nav">
             <a href="trang-chu.jsp" class="active">Trang chủ</a>
             	<c:choose>
-            		<c:when test="${sessionScope.user.role == '3' }">
+            		<c:when test="${sessionScope.user.role == 'ADMIN' }">
             			<a href="quan-ly-thuc-don.jsp">QL Thực đơn</a>
 	                    <a href="quan-ly-kho.jsp">QL Kho hàng</a>
 	                    <a href="quan-ly-nhan-vien.jsp">QL Nhân viên</a>
 	                    <a href="bao-cao-doanh-thu.jsp">Báo cáo</a>
             		</c:when>
-            		<c:when test="${sessionScope.user.role == '2' }">
+            		<c:when test="${sessionScope.user.role == 'BARISTA' }">
             			<a href="nhan-don-hang.jsp">Nhận Đơn Hàng</a>
                     	<a href="cap-nhat-trang-thai.jsp">Cập Nhật Trạng Thái</a>
             		</c:when>
-            		<c:when test="${sessionScope.user.role == '1' }">
-            			<a href="thuc-don.jsp">Thực đơn</a>
+            		<c:when test="${sessionScope.user.role == 'USER' }">
+            			<a href="${ctx}/Menu">Thực đơn</a>
                     	<a href="gio-hang.jsp">Giỏ hàng</a>
             		</c:when>
             		<c:otherwise>
-			            <a href="thuc-don.jsp">Thực đơn</a>
+			            <a href="${ctx}/Menu">Thực đơn</a>
 			            <a href="gio-hang.jsp">Giỏ hàng</a>
 			            <span style="color: #fff; margin: 0 15px;">|</span>
 			            <a href="dang-ky.jsp" style="color: var(--primary-color); font-weight: bold;">Đăng ký</a>
@@ -71,7 +71,6 @@
             <div class="item">
                 <!-- Đã thêm ?id=1 -->
                 <a href="chi-tiet-san-pham.jsp?id=1" class="product-link">
-                    <div class="badge-hot">HOT</div> 
                     <img src="hinh-anh/imgs/PHINDI_HANH_NHAN.jpg" alt="Phindi Hạnh Nhân">
                     <p>Phindi Hạnh Nhân</p>
                     <span class="old">55.000đ</span>
@@ -79,7 +78,14 @@
                 </a>
             </div>
             <!-- Đã thêm ?id=2 -->
-            <div class="item"><a href="chi-tiet-san-pham.jsp?id=2" class="product-link"><img src="hinh-anh/imgs/TSV_CU_NANG.jpg" alt="Trà Sen Vàng"><p>Trà Sen Vàng</p><span class="old">55.000đ</span><span class="new">45.000đ</span></a></div>
+	        <div class="item">
+	            <a href="chi-tiet-san-pham.jsp?id=2" class="product-link">
+		            <img src="hinh-anh/imgs/TSV_CU_NANG.jpg" alt="Trà Sen Vàng">
+		            <p>Trà Sen Vàng</p>
+		            <span class="old">55.000đ</span>
+		            <span class="new">45.000đ</span>
+	            </a>
+            </div>
             <!-- Đã thêm ?id=3 -->
             <div class="item"><a href="chi-tiet-san-pham.jsp?id=3" class="product-link"><img src="hinh-anh/imgs/FREEZE_TRA_XANH.jpg" alt="Freeze Trà Xanh"><p>Freeze Trà Xanh</p><span class="old">65.000đ</span><span class="new">55.000đ</span></a></div>
             <!-- Đã thêm ?id=4 -->
