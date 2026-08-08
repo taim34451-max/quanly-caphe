@@ -24,6 +24,7 @@ CREATE TABLE Product (
 
 
 Create table SizePrice(
+    SizeId int identity(1,1) primary key,
     ProductId int foreign key references Product(ProductId),
     SizeS decimal(12,2),
     SizeM decimal(12,2),

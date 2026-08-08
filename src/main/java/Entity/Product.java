@@ -6,6 +6,8 @@ import java.util.List;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Product")
 @Data
@@ -20,10 +22,6 @@ public class Product {
 
     @Column(name = "ProductName")
     private String productName;
-    
-    @Column(name = "Price",precision = 12,scale = 2)
-
-    private BigDecimal price;
 
     @Column(name = "Category")
     private String category;
@@ -40,6 +38,6 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<BillDetail> billDetails;
     
-    @OneToMany(mappedBy = "product")
-    private List<SizePrice> sizePrice;
+    @OneToOne(mappedBy = "product")
+    private SizePrice sizePrices;
 }

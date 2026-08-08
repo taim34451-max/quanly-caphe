@@ -36,7 +36,7 @@
         		<a href="${ctx }/chi_tiet/${u.productId}" class="product-link">
             	<img src="${ctx}/hinh-anh/imgs/${u.productId}.jpg" alt="Phindi Hạnh Nhân">
             	<p>${u.productName}</p>
-            	<span class="new">${u.price}</span>
+            	<span class="new">${u.sizePrices.sizeS}</span>
             	</a>
             </div>
         </c:forEach>
