@@ -32,6 +32,9 @@ public class Product {
     @Column(name = "ProductIMG")
     private String productIMG;
     
+    @Column(name = "Price")
+    private BigDecimal price;
+    
     @Column(name = "DrinkDescription")
     private String drinkDescription;	
 

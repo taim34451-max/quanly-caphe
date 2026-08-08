@@ -19,7 +19,8 @@ CREATE TABLE Product (
     ProductName NVARCHAR(100) NOT NULL,
     Category NVARCHAR(50) NULL,
     IsAvailable BIT DEFAULT 1,
-    ProductIMG nvarchar(50)
+    ProductIMG nvarchar(50),
+    Price decimal(12,2)
 );  GO
 
 

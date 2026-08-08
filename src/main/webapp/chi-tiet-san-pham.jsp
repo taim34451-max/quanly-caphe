@@ -41,19 +41,22 @@
                 <h1 id="detail-title">${item.productName}</h1>
               
                 
-                <div class="price-box">
-                   <span class="new" id="detail-price">{item.sizePrice.sizeS}đ</span>
-                    <span class="badge-hot" id="detail-badge" style="position: static; display: inline-block; margin-left: 10px;">HOT</span>
-                </div>
                 
-                <p class="description" id="detail-desc">${item.drinkDescription}</p>
               
                 <!-- FORM ĐẶT HÀNG CÓ CHỨA LOGIC CHỌN SIZE -->
                 <form action="gio-hang.jsp" method="GET" id="order-form" style="margin-bottom: 20px;">
                     <input type="hidden" name="id" id="detail-id-input" value="">
                     
                     <!-- Khối chọn Size (Chỉ hiện cho nước) -->
-                    <c:if test="${item.category != 'Bánh'}">
+                    <c:choose>
+                    <c:when test="${item.category != 'Bánh'}">
+                    <div class="price-box">
+                   <span class="new" id="detail-price">{item.sizePrice.sizeS}đ</span>
+                    <span class="badge-hot" id="detail-badge" style="position: static; display: inline-block; margin-left: 10px;">HOT</span>
+                </div>
+                
+                <p class="description" id="detail-desc">${item.drinkDescription}</p>
+                 
                         <label style="font-weight: bold; display: block; margin-bottom: 8px;">Chọn Size:</label>
                         <div style="display: flex; gap: 20px;">
 							    <label>
@@ -71,8 +74,13 @@
 							        Size L
 							    </label>
 						</div>
-                        </c:if>
-                    
+                        </c:when>
+                        <c:otherwise>
+                        	<span class="new" id="detail-price">
+               					${item.price}đ
+            				</span>
+                        </c:otherwise>
+                    </c:choose>
 
                     <div class="quantity-box" style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
                         <label for="soluong">Số lượng:</label>
