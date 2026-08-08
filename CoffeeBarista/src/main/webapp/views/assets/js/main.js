@@ -122,16 +122,16 @@ function updateDashboardDOM(data, contextPath) {
 	}
 	function renderOrderCard(order, contextPath) {
 	    const isPending = order.status === 'PENDING';
-	    const actionBtn = isPending 
-	        ? `<form action="${contextPath}/barista/update-status" method="POST" style="margin: 0;">
-	             <input type="hidden" name="id" value="${order.id}">
-	             <input type="hidden" name="status" value="MAKING">
-	             <input type="hidden" name="note" value="Đã nhận đơn">
-	             <button type="submit" class="btn"><i class="fas fa-play"></i> Nhận đơn (Making)</button>
-	           </form>`
-	        : `<a href="${contextPath}/barista/order-detail?id=${order.id}" class="btn btn-secondary">
-	             <i class="fas fa-eye"></i> Pha chế & Chi tiết
-	           </a>`;
+		const actionBtn = isPending 
+		    ? `<form action="${contextPath}/barista/order-detail" method="POST" style="margin: 0;">
+		         <input type="hidden" name="id" value="${order.id}">
+		         <input type="hidden" name="status" value="MAKING">
+		         <input type="hidden" name="note" value="Đã nhận đơn">
+		         <button type="submit" class="btn"><i class="fas fa-play"></i> Nhận đơn (Making)</button>
+		       </form>`
+		    : `<a href="${contextPath}/barista/order-detail?id=${order.id}" class="btn btn-secondary">
+		         <i class="fas fa-eye"></i> Pha chế & Chi tiết
+		       </a>`;
 	    const itemsHtml = order.items.map(item => `
 	        <li class="order-item-row">
 	            <div>

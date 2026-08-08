@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/assets/css/style.css">
     
-    <!-- CSS Bọc lót trực tiếp bảo đảm 100% giao diện mượt mà -->
+    <!-- CSS Bọc lót trực tiếp bảo đảm 100% giao diện mượt mà (Đã đổi sang Blue Luxury) -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        :root { --bg-main: #100e0d; --bg-sidebar: #171412; --bg-surface: #1e1a17; --bg-surface-hover: #292420; --color-primary: #d4a373; --color-text: #f4eae1; --color-text-secondary: #9c9186; --color-border: rgba(212, 163, 115, 0.12); --status-pending: #f59e0b; --status-pending-bg: rgba(245, 158, 11, 0.15); --status-making: #0ea5e9; --status-making-bg: rgba(14, 165, 233, 0.15); --status-completed: #10b981; --status-completed-bg: rgba(16, 185, 129, 0.15); --status-cancelled: #ef4444; --status-cancelled-bg: rgba(239, 68, 68, 0.15); }
+        :root { --bg-main: #0B1120; --bg-sidebar: #0F172A; --bg-surface: #1E293B; --bg-surface-hover: #334155; --color-primary: #38BDF8; --color-text: #F8FAFC; --color-text-secondary: #94A3B8; --color-border: rgba(56, 189, 248, 0.15); --status-pending: #f59e0b; --status-pending-bg: rgba(245, 158, 11, 0.15); --status-making: #0ea5e9; --status-making-bg: rgba(14, 165, 233, 0.15); --status-completed: #10b981; --status-completed-bg: rgba(16, 185, 129, 0.15); --status-cancelled: #ef4444; --status-cancelled-bg: rgba(239, 68, 68, 0.15); }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background-color: var(--bg-main); color: var(--color-text); min-height: 100vh; display: flex; }
         .app-container { display: flex; width: 100vw; min-height: 100vh; }
@@ -24,7 +24,10 @@
         .brand-name { font-size: 1.3rem; font-weight: 800; color: var(--color-primary); }
         .menu-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.5rem; }
         .menu-item a { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; color: var(--color-text-secondary); text-decoration: none; border-radius: 12px; font-weight: 500; }
-        .menu-item.active a { color: var(--bg-main); background: linear-gradient(135deg, var(--color-primary) 0%, #be8a58 100%); font-weight: 700; }
+        
+        /* Cập nhật Gradient cho Menu Active */
+        .menu-item.active a { color: #ffffff; background: linear-gradient(135deg, var(--color-primary) 0%, #0284C7 100%); font-weight: 700; }
+        
         .menu-badge { margin-left: auto; background-color: var(--bg-sidebar); color: var(--color-primary); padding: 0.2rem 0.5rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700; }
         .logout-btn { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; color: #ef4444; text-decoration: none; border-radius: 12px; font-weight: 600; background-color: rgba(239, 68, 68, 0.05); }
         .main-content { flex-grow: 1; margin-left: 280px; padding: 2.5rem; min-height: 100vh; }
@@ -43,7 +46,10 @@
         .stats-label { font-size: 0.8rem; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; }
         .stats-value { font-size: 1.8rem; font-weight: 800; margin-top: 0.2rem; }
         .dashboard-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .section-panel { background: rgba(30, 26, 23, 0.7); border: 1px solid var(--color-border); border-radius: 20px; padding: 1.75rem; }
+        
+        /* Cập nhật tone màu nền cho Section */
+        .section-panel { background: rgba(30, 41, 59, 0.6); border: 1px solid var(--color-border); border-radius: 20px; padding: 1.75rem; }
+        
         .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--color-border); }
         .section-title { font-size: 1.1rem; font-weight: 700; }
         .order-cards-list { display: flex; flex-direction: column; gap: 1.25rem; max-height: calc(100vh - 350px); overflow-y: auto; }
@@ -56,7 +62,10 @@
         .item-qty { color: var(--color-primary); font-weight: 700; margin-right: 0.5rem; }
         .order-card-footer { display: flex; justify-content: space-between; align-items: center; }
         .order-price { font-size: 1.1rem; font-weight: 800; }
-        .btn { background: linear-gradient(135deg, var(--color-primary) 0%, #be8a58 100%); color: var(--bg-main); border: none; padding: 0.65rem 1.2rem; border-radius: 10px; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+        
+        /* Cập nhật Gradient cho Button */
+        .btn { background: linear-gradient(135deg, var(--color-primary) 0%, #0284C7 100%); color: #ffffff; border: none; padding: 0.65rem 1.2rem; border-radius: 10px; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+        
         .btn-secondary { background: var(--bg-surface-hover); color: var(--color-text); border: 1px solid var(--color-border); }
         .empty-state { text-align: center; padding: 3rem 1.5rem; color: var(--color-text-secondary); }
         .empty-icon { font-size: 2.5rem; margin-bottom: 1rem; }
@@ -154,9 +163,12 @@
                                         </ul>
                                         <div class="order-card-footer">
                                             <span class="order-price"><fmt:formatNumber value="${order.totalPrice}" pattern="#,###" /> VNĐ</span>
-                                            <form action="${pageContext.request.contextPath}/barista/update-status" method="POST" style="margin: 0;">
+                                            
+                                            <!-- ĐÃ FIX: Điều hướng form về đúng /barista/order-detail -->
+                                            <form action="${pageContext.request.contextPath}/barista/order-detail" method="POST" style="margin: 0;">
                                                 <input type="hidden" name="id" value="${order.id}">
                                                 <input type="hidden" name="status" value="MAKING">
+                                                <input type="hidden" name="note" value="Đã nhận đơn">
                                                 <button type="submit" class="btn"><i class="fas fa-play"></i> Nhận đơn (Making)</button>
                                             </form>
                                         </div>

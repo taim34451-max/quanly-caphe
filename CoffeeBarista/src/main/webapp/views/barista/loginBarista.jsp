@@ -12,22 +12,22 @@
     <!-- Custom Style CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/assets/css/style.css">
     
-    <!-- CSS Dự phòng bảo đảm 100% hiện đẹp mượt mà -->
+    <!-- CSS Dự phòng bảo đảm 100% hiện đẹp mượt mà (Đã đổi sang Blue Luxury) -->
     <style>
-        body.login-body { background: radial-gradient(circle at center, #1b1613 0%, #100e0d 100%); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; font-family: 'Plus Jakarta Sans', sans-serif; }
-        .login-card { background: rgba(30, 26, 23, 0.85); backdrop-filter: blur(16px); width: 100%; max-width: 420px; padding: 40px 35px; border-radius: 24px; border: 1px solid rgba(212, 163, 115, 0.2); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); text-align: center; color: #f4eae1; }
-        .login-logo { font-size: 48px; color: #d4a373; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(212, 163, 115, 0.4)); }
-        .login-title { color: #f4eae1; font-size: 26px; font-weight: 800; margin-bottom: 6px; }
-        .login-subtitle { color: #9c9186; font-size: 14px; margin-bottom: 25px; }
+        body.login-body { background: radial-gradient(circle at center, #1E293B 0%, #0B1120 100%); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .login-card { background: rgba(30, 41, 59, 0.85); backdrop-filter: blur(16px); width: 100%; max-width: 420px; padding: 40px 35px; border-radius: 24px; border: 1px solid rgba(56, 189, 248, 0.2); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); text-align: center; color: #F8FAFC; }
+        .login-logo { font-size: 48px; color: #38BDF8; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.4)); }
+        .login-title { color: #F8FAFC; font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+        .login-subtitle { color: #94A3B8; font-size: 14px; margin-bottom: 25px; }
         .form-group { text-align: left; margin-bottom: 20px; }
-        .form-label { display: block; font-size: 13px; font-weight: 600; color: #f4eae1; margin-bottom: 8px; }
-        .form-input { width: 100%; padding: 12px 16px; background-color: #171412; border: 1px solid rgba(212, 163, 115, 0.2); border-radius: 12px; font-size: 14px; color: #f4eae1; outline: none; box-sizing: border-box; }
-        .form-input:focus { border-color: #d4a373; box-shadow: 0 0 10px rgba(212, 163, 115, 0.2); }
-        .btn { width: 100%; padding: 13px; background: linear-gradient(135deg, #d4a373 0%, #be8a58 100%); color: #100e0d; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .form-label { display: block; font-size: 13px; font-weight: 600; color: #F8FAFC; margin-bottom: 8px; }
+        .form-input { width: 100%; padding: 12px 16px; background-color: #0F172A; border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; font-size: 14px; color: #F8FAFC; outline: none; box-sizing: border-box; }
+        .form-input:focus { border-color: #38BDF8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.2); }
+        .btn { width: 100%; padding: 13px; background: linear-gradient(135deg, #38BDF8 0%, #0284C7 100%); color: #ffffff; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
         .login-error { background: rgba(239, 68, 68, 0.15); color: #fca5a5; padding: 10px 14px; border-radius: 12px; font-size: 13px; margin-bottom: 20px; border: 1px solid rgba(239, 68, 68, 0.3); text-align: left; }
-        .login-tip { margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(212, 163, 115, 0.12); color: #9c9186; font-size: 13px; }
-        .login-tip code { background: #171412; color: #d4a373; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+        .login-tip { margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(56, 189, 248, 0.12); color: #94A3B8; font-size: 13px; }
+        .login-tip code { background: #0F172A; color: #38BDF8; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
     </style>
 </head>
 <body class="login-body">

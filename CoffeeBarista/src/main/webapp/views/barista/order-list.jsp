@@ -11,18 +11,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/assets/css/style.css">
     
-    <!-- CSS Bọc lót trực tiếp -->
+    <!-- CSS Bọc lót trực tiếp (Đã đổi sang Blue Luxury) -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        :root { --bg-main: #100e0d; --bg-sidebar: #171412; --bg-surface: #1e1a17; --bg-surface-hover: #292420; --color-primary: #d4a373; --color-text: #f4eae1; --color-text-secondary: #9c9186; --color-border: rgba(212, 163, 115, 0.12); --status-pending: #f59e0b; --status-making: #0ea5e9; --status-completed: #10b981; --status-cancelled: #ef4444; }
+        
+        /* 1. BẢNG MÀU GỐC BLUE LUXURY */
+        :root { --bg-main: #0B1120; --bg-sidebar: #0F172A; --bg-surface: #1E293B; --bg-surface-hover: #334155; --color-primary: #38BDF8; --color-text: #F8FAFC; --color-text-secondary: #94A3B8; --color-border: rgba(56, 189, 248, 0.15); --status-pending: #f59e0b; --status-making: #0ea5e9; --status-completed: #10b981; --status-cancelled: #ef4444; }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background-color: var(--bg-main); color: var(--color-text); min-height: 100vh; display: flex; }
         .app-container { display: flex; width: 100vw; min-height: 100vh; }
         .sidebar { width: 280px; background-color: var(--bg-sidebar); border-right: 1px solid var(--color-border); padding: 2rem 1.5rem; display: flex; flex-direction: column; justify-content: space-between; height: 100vh; position: fixed; left: 0; top: 0; z-index: 100; }
         .brand-name { font-size: 1.3rem; font-weight: 800; color: var(--color-primary); }
+        .brand { display: flex; align-items: center; gap: 0.75rem; padding-bottom: 2rem; border-bottom: 1px solid var(--color-border); }
+        .brand-icon { font-size: 1.8rem; color: var(--color-primary); }
+       
         .menu-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.5rem; }
         .menu-item a { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; color: var(--color-text-secondary); text-decoration: none; border-radius: 12px; font-weight: 500; }
-        .menu-item.active a { color: var(--bg-main); background: linear-gradient(135deg, var(--color-primary) 0%, #be8a58 100%); font-weight: 700; }
+        
+        /* CẬP NHẬT GRADIENT CHO MENU ACTIVE */
+        .menu-item.active a { color: #ffffff; background: linear-gradient(135deg, var(--color-primary) 0%, #0284C7 100%); font-weight: 700; }
+        
         .logout-btn { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; color: #ef4444; text-decoration: none; border-radius: 12px; font-weight: 600; background-color: rgba(239, 68, 68, 0.05); }
         .main-content { flex-grow: 1; margin-left: 280px; padding: 2.5rem; min-height: 100vh; }
         .header-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 1.5rem; }
@@ -38,7 +47,10 @@
         .status-badge.making { color: var(--status-making); background: rgba(14, 165, 233, 0.15); }
         .status-badge.completed { color: var(--status-completed); background: rgba(16, 185, 129, 0.15); }
         .status-badge.cancelled { color: var(--status-cancelled); background: rgba(239, 68, 68, 0.15); }
-        .btn { background: linear-gradient(135deg, var(--color-primary) 0%, #be8a58 100%); color: var(--bg-main); border: none; padding: 0.65rem 1.2rem; border-radius: 10px; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+        
+        /* CẬP NHẬT GRADIENT CHO NÚT BẤM */
+        .btn { background: linear-gradient(135deg, var(--color-primary) 0%, #0284C7 100%); color: #ffffff; border: none; padding: 0.65rem 1.2rem; border-radius: 10px; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+        
         .btn-secondary { background: var(--bg-surface-hover); color: var(--color-text); border: 1px solid var(--color-border); }
     </style>
 </head>

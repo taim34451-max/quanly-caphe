@@ -28,13 +28,13 @@ public class UpdateOrderStatusServlet extends HttpServlet {
             if (note == null) {
                 note = "";
             }
-            
+                                                                                       
             boolean success = orderDAO.UpdateOrderStatus(id, status, note);
             
             if (success) {
                 
                 if ("MAKING".equalsIgnoreCase(status)) {
-                    
+                	
                     response.sendRedirect(request.getContextPath() + "/barista/order-detail?id=" + id);
                 } else if ("COMPLETED".equalsIgnoreCase(status) || "CANCELLED".equalsIgnoreCase(status)) {
                     

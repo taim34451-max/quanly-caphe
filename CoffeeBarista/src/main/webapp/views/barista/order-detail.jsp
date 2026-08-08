@@ -11,18 +11,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/assets/css/style.css">
     
-    <!-- CSS Bọc lót trực tiếp -->
+    <!-- CSS Bọc lót trực tiếp (Đã đổi sang Blue Luxury) -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        :root { --bg-main: #100e0d; --bg-sidebar: #171412; --bg-surface: #1e1a17; --bg-surface-hover: #292420; --color-primary: #d4a373; --color-text: #f4eae1; --color-text-secondary: #9c9186; --color-border: rgba(212, 163, 115, 0.12); }
+        
+        /* 1. BẢNG MÀU GỐC BLUE LUXURY */
+        :root { --bg-main: #0B1120; --bg-sidebar: #0F172A; --bg-surface: #1E293B; --bg-surface-hover: #334155; --color-primary: #38BDF8; --color-text: #F8FAFC; --color-text-secondary: #94A3B8; --color-border: rgba(56, 189, 248, 0.15); }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background-color: var(--bg-main); color: var(--color-text); min-height: 100vh; display: flex; }
         .app-container { display: flex; width: 100vw; min-height: 100vh; }
+        
+        /* SIDEBAR */
         .sidebar { width: 280px; background-color: var(--bg-sidebar); border-right: 1px solid var(--color-border); padding: 2rem 1.5rem; display: flex; flex-direction: column; justify-content: space-between; height: 100vh; position: fixed; left: 0; top: 0; z-index: 100; }
         .main-content { flex-grow: 1; margin-left: 280px; padding: 2.5rem; min-height: 100vh; }
+       
+        /* Bổ sung các class bị thiếu cho Sidebar */
+        .brand { display: flex; align-items: center; gap: 0.75rem; padding-bottom: 2rem; border-bottom: 1px solid var(--color-border); }
+        .brand-icon { font-size: 1.8rem; color: var(--color-primary); }
+        .brand-name { font-size: 1.3rem; font-weight: 800; color: var(--color-primary); }
+        .menu-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .menu-item a { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; color: var(--color-text-secondary); text-decoration: none; border-radius: 12px; font-weight: 500; }
+        
+        /* CẬP NHẬT GRADIENT CHO MENU ACTIVE (Thay nâu thành xanh đại dương) */
+        .menu-item.active a { color: #ffffff; background: linear-gradient(135deg, var(--color-primary) 0%, #0284C7 100%); font-weight: 700; }
+        
+        .menu-badge { margin-left: auto; background-color: var(--bg-sidebar); color: var(--color-primary); padding: 0.2rem 0.5rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700; }
+        .logout-btn { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; color: #ef4444; text-decoration: none; border-radius: 12px; font-weight: 600; background-color: rgba(239, 68, 68, 0.05); }	
+        
+        /* DETAIL LAYOUT */
         .detail-layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: 2rem; }
         .detail-main { background: var(--bg-surface); border: 1px solid var(--color-border); border-radius: 20px; padding: 2rem; }
-        .countdown-box { background: linear-gradient(135deg, rgba(212, 163, 115, 0.08) 0%, rgba(212, 163, 115, 0.02) 100%); border: 1.5px solid var(--color-primary); border-radius: 20px; padding: 1.5rem; text-align: center; margin-bottom: 2rem; }
+        
+        /* CẬP NHẬT MÀU NỀN MỜ CỦA HỘP ĐẾM GIỜ (Đồng bộ với RGB của màu Xanh primary) */
+        .countdown-box { background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(56, 189, 248, 0.02) 100%); border: 1.5px solid var(--color-primary); border-radius: 20px; padding: 1.5rem; text-align: center; margin-bottom: 2rem; }
+        
         .countdown-timer { font-size: 3rem; font-weight: 800; color: var(--color-primary); }
         .form-card { background: var(--bg-surface); border: 1px solid var(--color-border); border-radius: 20px; padding: 1.75rem; }
         .form-group { margin-bottom: 1.5rem; }
@@ -30,7 +53,11 @@
         .form-input { width: 100%; background-color: var(--bg-sidebar); border: 1px solid var(--color-border); border-radius: 12px; padding: 0.85rem 1rem; color: var(--color-text); font-size: 0.95rem; }
         .radio-group { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
         .radio-label { display: flex; align-items: center; justify-content: center; padding: 0.75rem; background: var(--bg-sidebar); border: 1px solid var(--color-border); border-radius: 12px; cursor: pointer; font-weight: 600; }
-        .btn { background: linear-gradient(135deg, var(--color-primary) 0%, #be8a58 100%); color: var(--bg-main); border: none; padding: 0.65rem 1.2rem; border-radius: 10px; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+        
+        /* CẬP NHẬT GRADIENT CHO NÚT BẤM CHÍNH */
+        .btn { background: linear-gradient(135deg, var(--color-primary) 0%, #0284C7 100%); color: #ffffff; border: none; padding: 0.65rem 1.2rem; border-radius: 10px; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+        
+        /* Nút màu xanh lá cây thành công giữ nguyên */
         .btn-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; }
         .btn-secondary { background: var(--bg-surface-hover); color: var(--color-text); border: 1px solid var(--color-border); }
         .detail-items-table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
@@ -72,16 +99,15 @@
                             </c:forEach>
                         </tbody>
                     </table>
-
-                    <c:if test="${order.status == 'MAKING' || order.status == 'PENDING'}">
-                        <form action="${pageContext.request.contextPath}/barista/update-status" method="POST" style="margin-top: 2rem;">
-                            <input type="hidden" name="id" value="${order.id}">
-                            <input type="hidden" name="status" value="COMPLETED">
-                            <button type="submit" class="btn btn-success" style="width: 100%; padding: 1rem; justify-content: center;">
-                                <i class="fas fa-check-double"></i> HOÀN THÀNH PHA CHẾ
-                            </button>
-                        </form>
-                    </c:if>
+<c:if test="${order.status == 'MAKING' || order.status == 'PENDING'}">
+    <form action="${pageContext.request.contextPath}/barista/order-detail" method="POST" style="margin-top: 2rem;">
+        <input type="hidden" name="id" value="${order.id}">
+        <input type="hidden" name="status" value="COMPLETED">
+        <button type="submit" class="btn btn-success" style="width: 100%; padding: 1rem; justify-content: center;">
+            <i class="fas fa-check-double"></i> HOÀN THÀNH PHA CHẾ
+        </button>
+    </form>
+</c:if>
                 </div>
 
                 <div>
@@ -99,5 +125,38 @@
     </div>
     <script>window.contextPath = '${pageContext.request.contextPath}';</script>
     <script src="${pageContext.request.contextPath}/views/assets/js/main.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const timerElement = document.getElementById("countdown-timer");
+        const countdownBox = document.querySelector(".countdown-box");
+        
+        if (!timerElement) return;
+
+// Dùng 'empty' để đảm bảo an toàn tuyệt đối nếu Java không truyền biến
+let timeRemaining = ${empty remainingSeconds ? 600 : remainingSeconds};
+
+        const timerInterval = setInterval(function() {
+            let minutes = Math.floor(timeRemaining / 60);
+            let seconds = timeRemaining % 60;
+
+            let displayMinutes = minutes < 10 ? "0" + minutes : minutes;
+            let displaySeconds = seconds < 10 ? "0" + seconds : seconds;
+
+            timerElement.textContent = displayMinutes + ":" + displaySeconds;
+
+            if (timeRemaining > 0) {
+                timeRemaining--; 
+            } else {
+                clearInterval(timerInterval); 
+                timerElement.textContent = "00:00";
+                
+                // Tự động nhấp nháy đỏ khi hết giờ
+                if(countdownBox) {
+                    countdownBox.classList.add("overdue"); 
+                }
+            }
+        }, 1000); 
+    });
+</script>
 </body>
 </html>
