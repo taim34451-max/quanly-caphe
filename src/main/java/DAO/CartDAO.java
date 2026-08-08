@@ -1,11 +1,14 @@
-package Entity;
+package DAO;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Cart {
+import Entity.CartItem;
+import Entity.Product;
+
+public class CartDAO {
 	List<CartItem> items = new ArrayList<CartItem>();
 	
 	public List<CartItem> getItem(){

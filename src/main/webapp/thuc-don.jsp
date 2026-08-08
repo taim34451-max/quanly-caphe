@@ -17,19 +17,7 @@
     <div id="banh-mi"></div>
 
     <!-- HEADER CHUẨN ĐỒNG BỘ -->
-    <header class="main-header">
-        <div class="header-container">
-            <div class="logo">Highlands Coffee</div>
-            <nav>
-                <a href="trang-chu.jsp">Trang chủ</a>
-                <a href="${ctx}/Menu" class="active">Thực đơn</a>
-                <a href="gio-hang.jsp">Giỏ hàng</a>
-                <span style="color: #fff; margin: 0 15px;">|</span>
-                <a href="dang-ky.jsp" style="color: var(--primary-color); font-weight: bold;">Đăng ký</a>
-                <a href="dang-nhap.jsp">Đăng nhập</a>
-            </nav>
-        </div>
-    </header>
+<%@ include file="Header.jsp"%>>
 
     <section class="section">
         <h2 class="page-title">Thực Đơn Highlands</h2>

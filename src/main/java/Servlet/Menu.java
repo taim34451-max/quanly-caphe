@@ -33,6 +33,7 @@ public class Menu extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		DrinkDAO drinkDAO = new DrinkDAO();
+		System.out.println("OK");
 		List<Product> list = drinkDAO.findAll();
 		request.setAttribute("listItem", list);
 		request.getRequestDispatcher("/thuc-don.jsp").forward(request, response);

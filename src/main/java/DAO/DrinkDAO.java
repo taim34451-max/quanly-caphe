@@ -18,7 +18,6 @@ public List<Product> findAll() {
 	
 		
 		String sql = "select o from Product o";
-		System.out.println("OK");
 		TypedQuery<Product> query = em.createQuery(sql,Product.class);
 		List<Product> list = query.getResultList();
 		return list;

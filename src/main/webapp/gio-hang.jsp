@@ -9,14 +9,7 @@
 </head>
 <body>
     <!-- HEADER CHUẨN ĐỒNG BỘ -->
-    <header class="main-header">
-        <div class="header-container">
-            <div class="logo">Highlands Coffee</div>
-            <nav id="main-nav">
-                <!-- Nội dung menu sẽ được JS render tự động theo phân quyền -->
-            </nav>
-        </div>
-    </header>
+    <%@ include file="Header.jsp" %>>
 
     <section class="section">
         <h2 class="page-title">Giỏ Hàng Của Bạn</h2>

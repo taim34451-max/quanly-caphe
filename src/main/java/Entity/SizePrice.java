@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -12,6 +13,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "SizePrice")
 public class SizePrice {
+	@Id
+	private int IdSize;
+	
 @Column(name = "SizeS")
 private BigDecimal sizeS;
 

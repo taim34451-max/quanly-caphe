@@ -45,7 +45,8 @@ CREATE TABLE Bill (
 GO
 
 -- 6. TẠO LẠI BẢNG BillDetail (Ghi chú chi tiết món)
-CREATE TABLE BillDetail (
+CREATE TABLE BillDetail -- CART TEMPORARY 
+    (
     DetailId INT IDENTITY(1,1) PRIMARY KEY,
     BillId INT NOT NULL FOREIGN KEY REFERENCES Bill(BillId) ON DELETE CASCADE,
     ProductId INT NOT NULL FOREIGN KEY REFERENCES Product(ProductId),
@@ -54,6 +55,8 @@ CREATE TABLE BillDetail (
     Note NVARCHAR(255) NULL
 );
 GO
+
+
 
 INSERT INTO Product
     (ProductName, Category, IsAvailable, ProductIMG)
