@@ -45,7 +45,7 @@
         <div class="products">
         <c:forEach var="u" items="${listItem}">
         	<div class="item">
-        		<a href="chi-tiet-san-pham.jsp/${u.productId}" class="product-link">
+        		<a href="${ctx }/chi_tiet/${u.productId}" class="product-link">
             	<img src="${ctx}/hinh-anh/imgs/${u.productId}.jpg" alt="Phindi Hạnh Nhân">
             	<p>${u.productName}</p>
             	<span class="new">${u.price}</span>

@@ -20,8 +20,9 @@ public class Product {
 
     @Column(name = "ProductName")
     private String productName;
-
+    
     @Column(name = "Price",precision = 12,scale = 2)
+
     private BigDecimal price;
 
     @Column(name = "Category")
@@ -32,7 +33,13 @@ public class Product {
 
     @Column(name = "ProductIMG")
     private String productIMG;
+    
+    @Column(name = "DrinkDescription")
+    private String drinkDescription;	
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<BillDetail> billDetails;
+    
+    @OneToMany(mappedBy = "product")
+    private List<SizePrice> sizePrice;
 }

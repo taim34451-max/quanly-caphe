@@ -71,7 +71,7 @@
             <div class="item">
                 <!-- Đã thêm ?id=1 -->
                 <a href="chi-tiet-san-pham.jsp?id=1" class="product-link">
-                    <img src="hinh-anh/imgs/PHINDI_HANH_NHAN.jpg" alt="Phindi Hạnh Nhân">
+                    <img src="hinh-anh/imgs/1.jpg" alt="Phindi Hạnh Nhân">
                     <p>Phindi Hạnh Nhân</p>
                     <span class="old">55.000đ</span>
                     <span class="new">49.000đ</span>
@@ -80,16 +80,16 @@
             <!-- Đã thêm ?id=2 -->
 	        <div class="item">
 	            <a href="chi-tiet-san-pham.jsp?id=2" class="product-link">
-		            <img src="hinh-anh/imgs/TSV_CU_NANG.jpg" alt="Trà Sen Vàng">
+		            <img src="hinh-anh/imgs/7.jpg" alt="Trà Sen Vàng">
 		            <p>Trà Sen Vàng</p>
 		            <span class="old">55.000đ</span>
 		            <span class="new">45.000đ</span>
 	            </a>
             </div>
             <!-- Đã thêm ?id=3 -->
-            <div class="item"><a href="chi-tiet-san-pham.jsp?id=3" class="product-link"><img src="hinh-anh/imgs/FREEZE_TRA_XANH.jpg" alt="Freeze Trà Xanh"><p>Freeze Trà Xanh</p><span class="old">65.000đ</span><span class="new">55.000đ</span></a></div>
+            <div class="item"><a href="chi-tiet-san-pham.jsp?id=3" class="product-link"><img src="hinh-anh/imgs/11.jpg" alt="Freeze Trà Xanh"><p>Freeze Trà Xanh</p><span class="old">65.000đ</span><span class="new">55.000đ</span></a></div>
             <!-- Đã thêm ?id=4 -->
-            <div class="item"><a href="chi-tiet-san-pham.jsp?id=4" class="product-link"><img src="hinh-anh/imgs/PHIN_SUA_DA.jpg" alt="Cà Phê Sữa Đá"><p>Cà Phê Sữa Đá (Size L)</p><span class="old">39.000đ</span><span class="new">35.000đ</span></a></div>
+            <div class="item"><a href="chi-tiet-san-pham.jsp?id=4" class="product-link"><img src="hinh-anh/imgs/2.jpg" alt="Cà Phê Sữa Đá"><p>Cà Phê Sữa Đá (Size L)</p><span class="old">39.000đ</span><span class="new">35.000đ</span></a></div>
         </div>
     </section>
 
@@ -97,13 +97,13 @@
         <h2 class="page-title">Cà Phê Phin Điển Hình</h2>
         <div class="products">
             <!-- Đã thêm ?id=5 -->
-            <div class="item"><a href="chi-tiet-san-pham.jsp?id=5" class="product-link"><img src="hinh-anh/imgs/PHIN_SUA_DA.jpg" alt="Phin Sữa Đá"><p>Phin Sữa Đá</p><span class="old">35.000đ</span><span class="new">29.000đ</span></a></div>
+            <div class="item"><a href="chi-tiet-san-pham.jsp?id=5" class="product-link"><img src="hinh-anh/imgs/6.jpg" alt="Phin Sữa Đá"><p>Phin Sữa Đá</p><span class="old">35.000đ</span><span class="new">29.000đ</span></a></div>
             <!-- Đã thêm ?id=6 -->
-            <div class="item"><a href="chi-tiet-san-pham.jsp?id=6" class="product-link"><img src="hinh-anh/imgs/PHIN_DEN_DA.jpg" alt="Phin Đen Đá"><p>Phin Đen Đá</p><span class="old">35.000đ</span><span class="new">29.000đ</span></a></div>
+            <div class="item"><a href="chi-tiet-san-pham.jsp?id=6" class="product-link"><img src="hinh-anh/imgs/5.jpg" alt="Phin Đen Đá"><p>Phin Đen Đá</p><span class="old">35.000đ</span><span class="new">29.000đ</span></a></div>
             <!-- Đã thêm ?id=7 -->
-            <div class="item"><a href="chi-tiet-san-pham.jsp?id=7" class="product-link"><img src="hinh-anh/imgs/BAC_SIU_1.jpg" alt="Bạc Xỉu Đá"><p>Bạc Xỉu Đá</p><span class="old">39.000đ</span><span class="new">33.000đ</span></a></div>
+            <div class="item"><a href="chi-tiet-san-pham.jsp?id=7" class="product-link"><img src="hinh-anh/imgs/4.jpg" alt="Bạc Xỉu Đá"><p>Bạc Xỉu Đá</p><span class="old">39.000đ</span><span class="new">33.000đ</span></a></div>
             <!-- Đã thêm ?id=8 -->
-            <div class="item"><a href="chi-tiet-san-pham.jsp?id=8" class="product-link"><img src="hinh-anh/imgs/PHIN_SUA_NONG.jpg" alt="Phin Sữa Nóng"><p>Phin Sữa Nóng</p><span class="old">35.000đ</span><span class="new">29.000đ</span></a></div>
+            <div class="item"><a href="chi-tiet-san-pham.jsp?id=8" class="product-link"><img src="hinh-anh/imgs/3.jpg" alt="Phin Sữa Nóng"><p>Phin Sữa Nóng</p><span class="old">35.000đ</span><span class="new">29.000đ</span></a></div>
         </div>
     </section>
 
@@ -111,13 +111,13 @@
         <h2 class="page-title">Bánh Mì & Đồ Ăn Nhẹ</h2>
         <div class="products">
             <!-- Đã thêm ?id=9 -->
-            <div class="item"><a href="chi-tiet-san-pham.jsp?id=9" class="product-link"><img src="hinh-anh/imgs/BANH_PHO_MAI_TRA_XANH.jpg" alt="Bánh Phô Mai Trà Xanh"><p>Bánh Phô Mai Trà Xanh</p><span class="old">28.000đ</span><span class="new">25.000đ</span></a></div>
+            <div class="item"><a href="chi-tiet-san-pham.jsp?id=9" class="product-link"><img src="hinh-anh/imgs/16.jpg" alt="Bánh Phô Mai Trà Xanh"><p>Bánh Phô Mai Trà Xanh</p><span class="old">28.000đ</span><span class="new">25.000đ</span></a></div>
             <!-- Đã thêm ?id=10 -->
-            <div class="item"><a href="chi-tiet-san-pham.jsp?id=10" class="product-link"><img src="hinh-anh/imgs/BMQ_GA.jpg" alt="Bánh Mì Que (Gà Phô Mai)"><p>Bánh Mì Que (Gà Phô Mai)</p><span class="old">22.000đ</span><span class="new">19.000đ</span></a></div>
+            <div class="item"><a href="chi-tiet-san-pham.jsp?id=10" class="product-link"><img src="hinh-anh/imgs/13.jpg" alt="Bánh Mì Que (Gà Phô Mai)"><p>Bánh Mì Que (Gà Phô Mai)</p><span class="old">22.000đ</span><span class="new">19.000đ</span></a></div>
             <!-- Đã thêm ?id=11 -->
-            <div class="item"><a href="chi-tiet-san-pham.jsp?id=11" class="product-link"><img src="hinh-anh/imgs/BANH_TIRAMISU.jpg" alt="Bánh Tiramisu"><p>Bánh Tiramisu</p><span class="old">39.000đ</span><span class="new">35.000đ</span></a></div>
+            <div class="item"><a href="chi-tiet-san-pham.jsp?id=11" class="product-link"><img src="hinh-anh/imgs/15.jpg" alt="Bánh Tiramisu"><p>Bánh Tiramisu</p><span class="old">39.000đ</span><span class="new">35.000đ</span></a></div>
             <!-- Đã thêm ?id=12 -->
-            <div class="item"><a href="chi-tiet-san-pham.jsp?id=12" class="product-link"><img src="hinh-anh/imgs/BANH_CHUOI.jpg" alt="Bánh Chuối"><p>Bánh Chuối</p><span class="old">32.000đ</span><span class="new">29.000đ</span></a></div>
+            <div class="item"><a href="chi-tiet-san-pham.jsp?id=12" class="product-link"><img src="hinh-anh/imgs/14.jpg" alt="Bánh Chuối"><p>Bánh Chuối</p><span class="old">32.000đ</span><span class="new">29.000đ</span></a></div>
         </div>
     </section>
 

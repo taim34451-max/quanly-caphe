@@ -1,10 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="NewFile.jsp" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <title>Chi tiết sản phẩm - Highlands Coffee</title>
-    <link rel="stylesheet" href="dinh-dang.css">
+    <link rel="stylesheet" href="${ctx}/dinh-dang.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -27,7 +28,7 @@
         <div class="product-detail-container">
             <!-- PHẦN HÌNH ẢNH & TABS -->
             <div class="detail-image">
-                <img id="detail-img" src="" alt="Hình sản phẩm">
+                <img id="detail-img" src="${ctx}/hinh-anh/imgs/${item.productId}.jsp" alt="Hình sản phẩm">
                 
                 <div class="product-tabs" style="margin-top: 20px;">
                     <input type="radio" name="det-tabs" id="det1" checked>
@@ -37,7 +38,7 @@
                     <label for="det2">Thành phần</label>
 
                     <div class="tab-content det1">
-                        <p id="detail-tab-desc">Đang tải mô tả sản phẩm...</p>
+                        <p id="detail-tab-desc">${item.drinkDescription}</p>
                     </div>
                     <div class="tab-content det2">
                         <table class="size-table" style="margin-top: 0;" id="detail-tab-ingredients">
@@ -49,14 +50,14 @@
             
             <!-- PHẦN THÔNG TIN & ĐẶT HÀNG -->
             <div class="detail-info">
-                <h1 id="detail-title">Đang tải tên sản phẩm...</h1>
+                <h1 id="detail-title">${item.productName}</h1>
                 
                 <div class="price-box">
-                    <span class="new" id="detail-price">0đ</span>
+                    <span class="new" id="detail-price">${item.price}</span>
                     <span class="badge-hot" id="detail-badge" style="position: static; display: inline-block; margin-left: 10px;">HOT</span>
                 </div>
                 
-                <p class="description" id="detail-desc">Đang tải thông tin...</p>
+                <p class="description" id="detail-desc">${item.drinkDescription}</p>
               
                 <!-- FORM ĐẶT HÀNG CÓ CHỨA LOGIC CHỌN SIZE -->
                 <form action="gio-hang.jsp" method="GET" id="order-form" style="margin-bottom: 20px;">
