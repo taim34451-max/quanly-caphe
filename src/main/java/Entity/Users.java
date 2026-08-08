@@ -30,6 +30,7 @@ public class Users {
     private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Bill> bills;
     
     

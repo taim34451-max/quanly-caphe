@@ -20,14 +20,17 @@
 	                    <a href="quan-ly-kho.jsp">QL Kho hàng</a>
 	                    <a href="quan-ly-nhan-vien.jsp">QL Nhân viên</a>
 	                    <a href="bao-cao-doanh-thu.jsp">Báo cáo</a>
+	                    <a href="${ctx}/Logout">Logout</a>
             		</c:when>
             		<c:when test="${sessionScope.user.role == 'BARISTA' }">
             			<a href="nhan-don-hang.jsp">Nhận Đơn Hàng</a>
                     	<a href="cap-nhat-trang-thai.jsp">Cập Nhật Trạng Thái</a>
+                    	<a href="${ctx}/Logout">Logout</a>
             		</c:when>
             		<c:when test="${sessionScope.user.role == 'USER' }">
             			<a href="${ctx}/Menu">Thực đơn</a>
                     	<a href="gio-hang.jsp">Giỏ hàng</a>
+                    	<a href="${ctx}/Logout">Logout</a>
             		</c:when>
             		<c:otherwise>
 			            <a href="${ctx}/Menu">Thực đơn</a>
@@ -37,6 +40,7 @@
 			            <a href="${ctx }/User/dang-nhap.jsp">Đăng nhập</a>
             		</c:otherwise>
             	</c:choose>
+            	
             </nav>
         </div>
     </header>

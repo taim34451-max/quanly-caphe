@@ -3,6 +3,8 @@ package Entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.apache.tomcat.jakartaee.commons.lang3.builder.ToStringExclude;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +22,7 @@ public class Bill {
 
     @ManyToOne
     @JoinColumn(name = "UserId")
+    @ToString.Exclude
     private Users user;
 
     @Column(name = "TableNumber", nullable = false)
