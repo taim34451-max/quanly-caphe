@@ -1,6 +1,0 @@
-127.0.0.1 - - [30/Jul/2026:14:07:26 +0700] "GET / HTTP/1.1" 404 752
-127.0.0.1 - - [30/Jul/2026:14:11:18 +0700] "GET / HTTP/1.1" 404 752
-127.0.0.1 - - [30/Jul/2026:14:11:18 +0700] "GET /CoffeeShopDemo/ HTTP/1.1" 404 771
-127.0.0.1 - - [30/Jul/2026:14:11:18 +0700] "GET /favicon.ico HTTP/1.1" 404 763
-127.0.0.1 - - [30/Jul/2026:14:13:16 +0700] "GET /CoffeeShopDemo/index.jsp HTTP/1.1" 302 -
-127.0.0.1 - - [30/Jul/2026:14:13:16 +0700] "GET /CoffeeShopDemo/coffee/coffee.jsp HTTP/1.1" 200 861
