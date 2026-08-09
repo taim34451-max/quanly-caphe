@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td colspan="5" style="text-align: center; padding: 40px; color: #777;">
                         <i class="fas fa-shopping-cart" style="font-size: 30px; margin-bottom: 10px; color: #ccc;"></i><br>
                         Giỏ hàng của bạn đang trống.<br>
-                        <a href="thuc-don.html" style="color: #b22830; text-decoration: none; font-weight: bold; margin-top: 15px; display: inline-block; border: 1px solid #b22830; padding: 8px 20px; border-radius: 20px;">Khám phá thực đơn</a>
+                        <a href="thuc-don.jsp" style="color: #b22830; text-decoration: none; font-weight: bold; margin-top: 15px; display: inline-block; border: 1px solid #b22830; padding: 8px 20px; border-radius: 20px;">Khám phá thực đơn</a>
                     </td>
                 </tr>`;
             cartTotalElement.innerText = "0đ";
