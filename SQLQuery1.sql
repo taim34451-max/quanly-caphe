@@ -170,10 +170,12 @@ VALUES
 (N'admin', N'123456', '0901234567', 'ADMIN'),
 (N'barista01', N'123456', '0902345678', 'BARISTA'),
 (N'barista02', N'123456', '0903456789', 'BARISTA'),
-(N'cashier01', N'123456', '0904567890', 'CASHIER');
+(N'user01', N'123456', '0904567890', 'USER');
 
+insert into users values
+('DuyAnh' , N'123456','0000000000','USER');
 GO
-
+ SELECT * FROM USERS;
 
 -- =========================================
 -- 2. BILL
