@@ -7,7 +7,7 @@ public class DBConnection {
 
     private static final String URL = "jdbc:sqlserver://localhost;instanceName=SQLEXPRESS01;databaseName=PolyCoffee;encrypt=false;trustServerCertificate=true;";
     private static final String USER = "sa";
-    private static final String PASSWORD = "123456"; // 👈 SỬA THÀNH MẬT KHẨU SA SQL SERVER CỦA MÁY BẠN
+    private static final String PASSWORD = "123456"; 
 
     public static Connection getConnection() {
         try {
