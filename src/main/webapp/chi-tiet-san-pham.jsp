@@ -44,54 +44,104 @@
                 
               
                 <!-- FORM ĐẶT HÀNG CÓ CHỨA LOGIC CHỌN SIZE -->
-                <form action="/ORDER" method="GET" id="order-form" style="margin-bottom: 20px;">
-                    <input type="hidden" name="id" id="detail-id-input" value="">
-                    
-                    <!-- Khối chọn Size (Chỉ hiện cho nước) -->
-                    <c:choose>
-                    <c:when test="${item.category != 'Bánh'}">
-                    <div class="price-box">
-                   <span class="new" id="detail-price">{item.sizePrice.sizeS}đ</span>
-                    <span class="badge-hot" id="detail-badge" style="position: static; display: inline-block; margin-left: 10px;">HOT</span>
-                </div>
-                
-                <p class="description" id="detail-desc">${item.drinkDescription}</p>
-                 
-                        <label style="font-weight: bold; display: block; margin-bottom: 8px;">Chọn Size:</label>
-                        <div style="display: flex; gap: 20px;">
-							    <label>
-							        <input type="radio" name="size" value="S" data-price="${item.sizePrices.sizeS }" checked>
-							        Size S
-							    </label>
-							
-							    <label>
-							        <input type="radio" name="size" value="M" data-price="${item.sizePrices.sizeM}">
-							        Size M
-							    </label>
-							
-							    <label>
-							        <input type="radio" name="size" value="L" data-price="${item.sizePrices.sizeL }">
-							        Size L
-							    </label>
-						</div>
-                        </c:when>
-                        <c:otherwise>
-                        	<span class="new" id="detail-price">
-               					${item.price}đ
-            				</span>
-                        </c:otherwise>
-                    </c:choose>
-
-                    <div class="quantity-box" style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                        <label for="soluong">Số lượng:</label>
-                        <input type="number" name="sl" id="soluong" value="1" min="1">
-                        
-                    </div>
-
-                    <div class="action-buttons">
-                        <button type="submit" class="btn-buy-now">Thêm vào giỏ / Mua ngay</button>
-                    </div>
-                </form> 
+			<form action="${ctx}/cart"
+			      method="GET"
+			      id="order-form"
+			      style="margin-bottom: 20px;">
+			
+			    <input type="hidden" name="action" value="add">
+			
+			    <input type="hidden"
+			           name="id"
+			           id="detail-id-input"
+			           value="${item.productId}">
+			
+			    <c:choose>
+			
+			        <c:when test="${item.category != 'Bánh'}">
+			
+			            <div class="price-box">
+			                <span class="new" id="detail-price">
+			                    ${item.sizePrices.sizeS}đ
+			                </span>
+			
+			                <span class="badge-hot"
+			                      id="detail-badge"
+			                      style="position: static; display: inline-block; margin-left: 10px;">
+			                    HOT
+			                </span>
+			            </div>
+			
+			            <p class="description" id="detail-desc">
+			                ${item.drinkDescription}
+			            </p>
+			
+			            <label style="font-weight: bold; display: block; margin-bottom: 8px;">
+			                Chọn Size:
+			            </label>
+			
+			            <div style="display: flex; gap: 20px;">
+			
+			                <label>
+			                    <input type="radio"
+			                           name="size"
+			                           value="S"
+			                           data-price="${item.sizePrices.sizeS}"
+			                           checked>
+			                    Size S
+			                </label>
+			
+			                <label>
+			                    <input type="radio"
+			                           name="size"
+			                           value="M"
+			                           data-price="${item.sizePrices.sizeM}">
+			                    Size M
+			                </label>
+			
+			                <label>
+			                    <input type="radio"
+			                           name="size"
+			                           value="L"
+			                           data-price="${item.sizePrices.sizeL}">
+			                    Size L
+			                </label>
+			
+			            </div>
+			
+			        </c:when>
+			
+			        <c:otherwise>
+			
+			            <span class="new" id="detail-price">
+			                ${item.price}đ
+			            </span>
+			
+			        </c:otherwise>
+			
+			    </c:choose>
+			
+			    <div class="quantity-box"
+			         style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+			
+			        <label for="soluong">Số lượng:</label>
+			
+			        <input type="number"
+			               name="sl"
+			               id="soluong"
+			               value="1"
+			               min="1">
+			
+			    </div>
+			
+			    <div class="action-buttons">
+			    <input type="hidden" name="action" value="checkout">
+			        <button type="submit" class="btn-buy-now">
+			            Thêm vào giỏ / Mua ngay
+			        </button>
+			    </div>
+			
+			</form>
                 
                 <ul class="policy-list">
                     <li>✔️ Giao hàng hỏa tốc nội thành trong 30 phút</li>

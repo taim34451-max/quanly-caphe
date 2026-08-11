@@ -8,58 +8,87 @@ import Entity.CartItem;
 import Entity.Product;
 
 public class CartDAO {
-    private List<CartItem> items = new ArrayList<>();
+	
+	List<CartItem> items = new ArrayList<CartItem>();
+	
+	public List<CartItem> getItem(){
+			
+		return items;
+	}
+	
+	
+	
+	public void addItem(Product drink, String size, int quantity) {
 
-    public List<CartItem> getItems() {
-        return items;
-    }
+	    for (CartItem item : items) {
 
-    public void addItem(Product drink) {
-        if (drink == null || drink.getProductId() == null) {
-            return;
-        }
+	        if (item.getDrink().getProductId().equals(drink.getProductId())
+	                && java.util.Objects.equals(item.getSize(), size)) {
 
-        for (CartItem item : items) {
-            // Compare ProductId (Integer) with ProductId (Integer)
-            if (item.getDrink() != null && item.getDrink().getProductId().equals(drink.getProductId())) {
-                item.setQuantity(item.getQuantity() + 1);
-                return;
-            }
-        }
-        items.add(new CartItem(drink, 1));
-    }
+	            item.setQuantity(item.getQuantity() + quantity);
+	            return;
+	        }
+	    }
 
-    public void deleteItem(int productId) {
-        items.removeIf(i -> i.getDrink() != null && i.getDrink().getProductId().equals(productId));
-    }
+	    items.add(new CartItem(drink, quantity, size));
+	}
 
-    public void updateItem(int productId, int qty) {
-        if (qty <= 0) {
-            deleteItem(productId);
-            return;
-        }
 
-        for (CartItem item : items) {
-            if (item.getDrink() != null && item.getDrink().getProductId().equals(productId)) {
-                item.setQuantity(qty);
-                return;
-            }
-        }
-    }
+	public void deleteItem(int id, String size) {
 
-    public BigDecimal getTotal() {
-        BigDecimal total = BigDecimal.ZERO;
-        for (CartItem item : items) {
-            if (item.getDrink() != null && item.getDrink().getPrice() != null) {
-                BigDecimal itemTotal = item.getDrink().getPrice()
-                        .multiply(BigDecimal.valueOf(item.getQuantity()));
-                total = total.add(itemTotal);
-            }
-        }
-        return total;
-    }
+	    items.removeIf(item ->
+	        item.getDrink().getProductId().equals(id)
+	        && java.util.Objects.equals(item.getSize(), size)
+	    );
+	}
 
-    public void clear() {
+
+	public void updateItem(int id, int qty, String size) {
+
+	    for (CartItem item : items) {
+
+	        if (item.getDrink().getProductId().equals(id)
+	                && java.util.Objects.equals(item.getSize(), size)) {
+
+	            item.setQuantity(qty);
+	            return;
+	        }
+	    }
+	}
+	
+
+	public BigDecimal getTotal() {
+
+	    BigDecimal total = BigDecimal.ZERO;
+
+	    for (CartItem item : items) {
+
+	        BigDecimal price;
+
+	        if ("S".equals(item.getSize())) {
+	            price = item.getDrink().getSizePrices().getSizeS();
+
+	        } else if ("M".equals(item.getSize())) {
+	            price = item.getDrink().getSizePrices().getSizeM();
+
+	        } else if ("L".equals(item.getSize())) {
+	            price = item.getDrink().getSizePrices().getSizeL();
+
+	        } else {
+	            price = item.getDrink().getPrice();
+	        }
+
+	        total = total.add(
+	            price.multiply(
+	                BigDecimal.valueOf(item.getQuantity())
+	            )
+	        );
+	    }
+
+	    return total;
+	}
+	
+	public void clear() {
         items.clear();
     }
 }

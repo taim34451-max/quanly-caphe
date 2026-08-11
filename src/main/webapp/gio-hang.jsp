@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ include file="NewFile.jsp" %>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -15,41 +16,243 @@
         <h2 class="page-title">Giỏ Hàng Của Bạn</h2>
         
         <!-- ĐIỂM THAY ĐỔI 1: Gọi hàm handleOrderSubmit() thay vì xử lý tĩnh -->
-        <form class="cart-container" style="margin-top: 30px;" onsubmit="handleOrderSubmit(event)">
-            <div class="cart-items">
-                <table class="cart-table">
-                    <thead>
-                        <tr>
-                            <th>Sản phẩm</th>
-                            <th>Đơn giá</th>
-                            <th>Số lượng</th>
-                            <th>Thành tiền</th>
-                            <th>Xóa</th>
-                        </tr>
-                    </thead>
-                    <tbody id="cart-items">
-                        <!-- Dữ liệu sẽ tự động sinh ra từ file gio-hang.js -->
-                    </tbody>
-                </table>
-            </div>
+        <!-- <form class="cart-container" style="margin-top: 30px;" onsubmit="handleOrderSubmit(event)"> -->
+        <form action="${ctx}/cart" method="get" >
 
-            <div class="cart-summary">
-                <h3>Thông tin giao hàng</h3>
-                <div class="checkout-form">
-                    <input type="text" id="customer-name" placeholder="Họ và tên người nhận" autocomplete="name" required>
-                    <input type="tel" id="customer-phone" placeholder="Số điện thoại" autocomplete="tel" required>
-                    <input type="text" id="customer-address" placeholder="Địa chỉ giao hàng chi tiết" autocomplete="street-address" required>
-                    <textarea id="customer-note" placeholder="Ghi chú đơn hàng" rows="3"></textarea>
-                    
-                    <div class="total-price">
-                        <strong>Tổng cộng:</strong>
-                        <output name="tong" class="new" id="cart-total">0đ</output>
-                    </div>
-                    
-                    <button type="submit" class="btn-checkout" style="background-color: var(--dark-bg);">Tiến hành đặt hàng</button>
-                </div>
-            </div>
-        </form>
+<div class="cart-container">
+<div class="cart-items">
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Xóa</th>
+            </tr>
+        </thead>
+
+        <tbody id="cart-items">
+
+            <c:forEach items="${sessionScope.cart.item}" var="u">
+
+                <tr>
+
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+
+                            <img
+                                src="${ctx}/hinh-anh/imgs/${u.drink.productId}.jpg"
+                                alt="${u.drink.productName}"
+                                style="width: 70px; height: 70px; object-fit: cover; border-radius: 8px;"
+                            >
+
+                            <div>
+                                <strong>${u.drink.productName}</strong>
+
+                                <c:if test="${not empty u.size}">
+                                    <div style="font-size: 14px; color: #777; margin-top: 5px;">
+                                        Size: ${u.size}
+                                    </div>
+                                </c:if>
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>
+                        <c:choose>
+
+                            <c:when test="${u.size == 'S'}">
+                                ${u.drink.sizePrices.sizeS}đ
+                            </c:when>
+
+                            <c:when test="${u.size == 'M'}">
+                                ${u.drink.sizePrices.sizeM}đ
+                            </c:when>
+
+                            <c:when test="${u.size == 'L'}">
+                                ${u.drink.sizePrices.sizeL}đ
+                            </c:when>
+
+                            <c:otherwise>
+                                ${u.drink.price}đ
+                            </c:otherwise>
+
+                        </c:choose>
+                    </td>
+
+                    <td>
+
+                        <form action="${ctx}/cart" method="get"
+                              style="display: flex; align-items: center; gap: 5px;">
+
+                            <input type="hidden" name="action" value="update">
+
+                            <input
+                                type="hidden"
+                                name="id"
+                                value="${u.drink.productId}"
+                            >
+
+                            <input
+                                type="hidden"
+                                name="size"
+                                value="${u.size}"
+                            >
+
+                            <input
+                                type="number"
+                                name="quantity"
+                                value="${u.quantity}"
+                                min="1"
+                                style="width: 60px;"
+                                onchange="this.form.submit()"
+                            >
+
+                        </form>
+
+                    </td>
+
+                    <td>
+                        <c:choose>
+
+                            <c:when test="${u.size == 'S'}">
+                                ${u.drink.sizePrices.sizeS * u.quantity}đ
+                            </c:when>
+
+                            <c:when test="${u.size == 'M'}">
+                                ${u.drink.sizePrices.sizeM * u.quantity}đ
+                            </c:when>
+
+                            <c:when test="${u.size == 'L'}">
+                                ${u.drink.sizePrices.sizeL * u.quantity}đ
+                            </c:when>
+
+                            <c:otherwise>
+                                ${u.drink.price * u.quantity}đ
+                            </c:otherwise>
+
+                        </c:choose>
+                    </td>
+
+                    <td>
+
+                        <form action="${ctx}/cart" method="get">
+
+                            <input type="hidden" name="action" value="delete">
+
+                            <input
+                                type="hidden"
+                                name="id"
+                                value="${u.drink.productId}"
+                            >
+
+                            <input
+                                type="hidden"
+                                name="size"
+                                value="${u.size}"
+                            >
+
+                            <button
+                                type="submit"
+                                style="
+                                    border: none;
+                                    background: none;
+                                    color: #b22830;
+                                    cursor: pointer;
+                                    font-size: 18px;
+                                "
+                                title="Xóa sản phẩm"
+                            >
+                                <i class="fas fa-trash"></i>
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+            </c:forEach>
+
+        </tbody>
+    </table>
+</div>
+
+
+</form>
+
+<div class="cart-summary">
+
+
+<h3>Thông tin giao hàng</h3>
+
+<form action="${ctx}/cart" method="get" class="checkout-form">
+
+    <input type="hidden" name="action" value="checkout">
+
+    <input
+        type="text"
+        id="customer-name"
+        name="customerName"
+        placeholder="Họ và tên người nhận"
+        autocomplete="name"
+        value="${sessionScope.user.userName}"
+        required
+    >
+
+    <input
+        type="tel"
+        id="customer-phone"
+        name="customerPhone"
+        placeholder="Số điện thoại"
+        autocomplete="tel"
+        value="${sessionScope.user.userPhone}"
+        required
+    >
+
+    <input
+        type="text"
+        id="customer-address"
+        name="tableNumber"
+        placeholder="Số bàn"
+        autocomplete="off"
+        required
+    >
+
+    <textarea
+        id="customer-note"
+        name="note"
+        placeholder="Ghi chú đơn hàng"
+        rows="3"
+    ></textarea>
+
+    <div class="total-price">
+
+        <strong>Tổng cộng:</strong>
+
+        <output
+            name="tong"
+            class="new"
+            id="cart-total"
+        >${sessionScope.cart.total}đ</output>
+
+    </div>
+
+    <button
+        type="submit"
+        class="btn-checkout"
+        style="background-color: var(--dark-bg);"
+    >
+        Tiến hành đặt hàng
+    </button>
+
+</form>
+
+
+</div>
+        </div>
     </section>
 
     <!-- ĐIỂM THAY ĐỔI 2: POPUP ĐẶT HÀNG THÀNH CÔNG (LAYOUT 2 CỘT SONG SONG) -->
@@ -82,8 +285,8 @@
                     <img src="hinh-anh/imgs/1784860941626_2143688342375985594_g665967586608572216_7d5734403ef9dd35920f3448d248f933.jpg" alt="Zalo QR Code" style="width: 170px; height: 170px; object-fit: cover; border-radius: 8px;">
                 </div>
                 
-                <h3 style="color: #333; margin-top: 15px; font-size: 16px;">
-                    Mai Thành Tài<br>
+              <!--   <h3 style="color: #333; margin-top: 15px; font-size: 16px;">
+                    Mai Thành Tài<br> -->
                     <span style="color: var(--dark-bg); font-size: 18px; display: inline-block; margin-top: 5px;">0344591828</span>
                 </h3>
                 
@@ -117,7 +320,7 @@
     </footer>
 
     <!-- GỌI CÁC FILE SCRIPT -->
-    <script src="main.js"></script>
-    <script src="gio-hang.js"></script>
+<!--     <script src="main.js"></script>
+    <script src="gio-hang.js"></script> -->
 </body>
 </html>

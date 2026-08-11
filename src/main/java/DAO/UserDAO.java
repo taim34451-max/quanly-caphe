@@ -15,7 +15,7 @@ public class UserDAO {
         return factory.createEntityManager();
     }
 	
-    public List<Users> findAll() {
+    public List<Users> findAll() { 
         EntityManager em = getEntityManager();
         try {
             String sql = "SELECT u FROM Users u";
