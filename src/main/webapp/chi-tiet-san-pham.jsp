@@ -141,7 +141,7 @@
     </footer>
 
     <!-- Gọi file JavaScript điều khiển logic động cho trang Chi tiết -->
-	<!-- <script>
+	<script>
 
     const sizes = document.querySelectorAll('input[name="size"]');
     const price = document.getElementById("detail-price");
@@ -166,6 +166,6 @@
     // Chạy ngay khi vừa mở trang
     updatePrice();
 
-</script> -->
+</script> 
 </body>
 </html>

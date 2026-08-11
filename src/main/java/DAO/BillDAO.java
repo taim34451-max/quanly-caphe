@@ -1,78 +1,161 @@
 package DAO;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Entity.Bill;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 
 public class BillDAO {
-	EntityManagerFactory factory = Persistence.createEntityManagerFactory("PolyCoffee");
-	EntityManager em = factory.createEntityManager();
-	
-public List<Bill> findAll() {
-		
-		String sql = "select o from Bill o";
-		TypedQuery<Bill> query = em.createQuery(sql,Bill.class);
-		List<Bill> list = query.getResultList();
-		return list;
-	}
-	
-	public Bill FindByID(String id) {
-		Bill users = em.find(Bill.class, id);
-		return users;
-	}
-	
-	public void CreateBill(Bill u) {
-		try {
-			em.getTransaction().begin();
-			em.persist(u);
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			// TODO: handle exception
-			em.getTransaction().rollback();
-		}
-	}
-	
-	public void UpdateBill(Bill u) {
-		Bill exit = em.find(Bill.class, u.getBillId());
-		if (exit!=null) {
-			try {
-				em.getTransaction().begin();
-				em.merge(u);
-				em.getTransaction().commit();
-			} catch (Exception e) {
-				// TODO: handle exception
-				em.getTransaction().rollback();
-			}
-		}
-	}
-	
-	public void DeleteBill(String id) {
-		Bill exit = em.find(Bill.class, id);
-		String sql = "delete from Bill o where o.users.iduser like :id";
-		String sql2 = "delete from BillDetail o where o.Bill.users.iduser like :id";
-		try {
-			em.getTransaction().begin();
-			em.createQuery(sql).setParameter("id", id).executeUpdate();
-			em.createQuery(sql2).setParameter("id", id).executeUpdate();
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			// TODO: handle exception
-			em.getTransaction().rollback();
-		}
-		
-		if(exit!=null) {
-			try {
-				em.getTransaction().begin();
-				em.remove(exit);
-				em.getTransaction().commit();
-			} catch (Exception e) {
-				// TODO: handle exception
-				em.getTransaction().rollback();
-			}
-		}
-	}
+
+    private EntityManagerFactory emf;
+    private EntityManager em;
+
+    public BillDAO() {
+
+        emf = Persistence.createEntityManagerFactory("PolyCoffee");
+        em = emf.createEntityManager();
+    }
+    
+    
+
+    // ==========================================
+    // 1. THỐNG KÊ SỐ LƯỢNG ĐƠN THEO STATUS
+    // ==========================================
+
+    public Map<String, Integer> getStatusCounts() {
+
+        Map<String, Integer> counts = new HashMap<>();
+
+        counts.put("PENDING", 0);
+        counts.put("MAKING", 0);
+        counts.put("COMPLETED", 0);
+        counts.put("CANCELLED", 0);
+
+        List<Object[]> result = em.createQuery(
+                "SELECT b.status, COUNT(b) " +
+                "FROM Bill b " +
+                "GROUP BY b.status",
+                Object[].class
+        ).getResultList();
+
+        for (Object[] row : result) {
+
+            String status = (String) row[0];
+            Long count = (Long) row[1];
+
+            if (status != null) {
+
+                counts.put(
+                    status.toUpperCase(),
+                    count.intValue()
+                );
+            }
+        }
+
+        return counts;
+    }
+
+
+    // ==========================================
+    // 2. LẤY DANH SÁCH ĐƠN
+    // ==========================================
+
+    public List<Bill> getOrdersByStatus(String statusFilter) {
+
+        if (statusFilter == null
+                || statusFilter.trim().isEmpty()
+                || "ALL".equalsIgnoreCase(statusFilter)) {
+
+            return em.createQuery(
+                    "SELECT b FROM Bill b " +
+                    "ORDER BY b.createdDate DESC",
+                    Bill.class
+            ).getResultList();
+        }
+
+        return em.createQuery(
+                "SELECT b FROM Bill b " +
+                "WHERE UPPER(b.status) = :status " +
+                "ORDER BY b.createdDate DESC",
+                Bill.class
+        )
+        .setParameter("status", statusFilter.toUpperCase())
+        .getResultList();
+    }
+
+
+    // ==========================================
+    // 3. LẤY ĐƠN THEO ID
+    // ==========================================
+
+    public Bill getOrderById(int orderId) {
+
+        return em.find(Bill.class, orderId);
+    }
+
+
+    // ==========================================
+    // 4. UPDATE STATUS
+    // ==========================================
+
+    public boolean updateOrderStatus(
+            int billId,
+            String status,
+            String note) {
+
+        EntityTransaction transaction = em.getTransaction();
+
+        try {
+
+            transaction.begin();
+
+            Bill bill = em.find(Bill.class, billId);
+
+            if (bill == null) {
+
+                transaction.rollback();
+
+                return false;
+            }
+
+            bill.setStatus(status.toUpperCase());
+            bill.setNote(note != null ? note : "");
+
+            transaction.commit();
+
+            return true;
+
+        } catch (Exception e) {
+
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+
+            e.printStackTrace();
+
+            return false;
+        }
+    }
+
+
+    // ==========================================
+    // 5. ĐÓNG ENTITY MANAGER
+    // ==========================================
+
+    public void close() {
+
+        if (em != null && em.isOpen()) {
+            em.close();
+        }
+
+        if (emf != null && emf.isOpen()) {
+            emf.close();
+        }
+    }
 }

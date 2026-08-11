@@ -2,6 +2,7 @@ package Entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.tomcat.jakartaee.commons.lang3.builder.ToStringExclude;
 
@@ -24,6 +25,10 @@ public class Bill {
     @JoinColumn(name = "UserId")
     @ToString.Exclude
     private Users user;
+    
+    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<BillDetail> billDetails;
 
     @Column(name = "TableNumber", nullable = false)
     private String tableNumber;

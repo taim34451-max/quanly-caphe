@@ -31,7 +31,7 @@ public class BillList extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		BillDAO dao = new BillDAO();
-		var list = dao.findAll();
+		var list = dao.getOrdersByStatus("");
 		request.setAttribute("BillList", list);
 		
 		request.getRequestDispatcher("/Admin/BillList.jsp").forward(request, response);
