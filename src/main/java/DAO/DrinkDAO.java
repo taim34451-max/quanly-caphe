@@ -27,7 +27,7 @@ public List<Product> findAll() {
 		return em.find(Product.class, id);
 	}
 	
-	public void CreateBill(Product u) {
+	public void CreateProduct(Product u) {
 		try {
 			em.getTransaction().begin();
 			em.persist(u);
@@ -38,7 +38,7 @@ public List<Product> findAll() {
 		}
 	}
 	
-	public void UpdateBill(Product u) {
+	public void UpdateProduct(Product u) {
 		Product exit = em.find(Product.class, u.getProductId());
 		if (exit!=null) {
 			try {
@@ -52,30 +52,29 @@ public List<Product> findAll() {
 		}
 	}
 	
-	public void DeleteBill(int id) {
+	public void DeleteProduct(int id) {
 		Product exit = em.find(Product.class, id);
 		String sql = "delete from Bill o where o.users.iduser like :id";
-		String sql2 = "delete from BillDetail o where o.Bill.users.iduser like :id";
-		try {
-			em.getTransaction().begin();
-			em.createQuery(sql).setParameter("id", id).executeUpdate();
-			em.createQuery(sql2).setParameter("id", id).executeUpdate();
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			// TODO: handle exception
-			em.getTransaction().rollback();
-		}
-		
-		if(exit!=null) {
-			try {
-				em.getTransaction().begin();
-				em.remove(exit);
-				em.getTransaction().commit();
-			} catch (Exception e) {
-				// TODO: handle exception
-				em.getTransaction().rollback();
-			}
-		}
-	}
+		if (exit != null) {
+
+            try {
+
+                em.getTransaction().begin();
+
+                em.remove(exit);
+
+                em.getTransaction().commit();
+
+            } catch (Exception e) {
+
+                if (em.getTransaction().isActive()) {
+                    em.getTransaction().rollback();
+                }
+
+                e.printStackTrace();
+            }
+        }
+    }
+	
 
 }

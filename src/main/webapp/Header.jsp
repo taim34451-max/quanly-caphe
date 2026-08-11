@@ -18,7 +18,7 @@
             		<c:when test="${sessionScope.user.role == 'ADMIN' }">
             			<a href="quan-ly-thuc-don.jsp">QL Thực đơn</a>
 	                    <a href="quan-ly-kho.jsp">QL Kho hàng</a>
-	                    <a href="quan-ly-nhan-vien.jsp">QL Nhân viên</a>
+	                    <a href="${ctx }/UserList">QL Nhân viên</a>
 	                    <a href="bao-cao-doanh-thu.jsp">Báo cáo</a>
 	                    <a href="${ctx}/Logout">Logout</a>
             		</c:when>
