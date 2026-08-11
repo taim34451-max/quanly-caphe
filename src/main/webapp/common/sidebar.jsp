@@ -56,7 +56,7 @@
     </div>
     
     <div>
-        <a href="${pageContext.request.contextPath}/logout" class="logout-btn">
+        <a href="${pageContext.request.contextPath}/Logout" class="logout-btn">
             <i class="fas fa-sign-out-alt"></i>
             <span>Đăng xuất</span>
         </a>

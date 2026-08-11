@@ -19,7 +19,7 @@ public class UpdateOrderStatusServlet extends HttpServlet {
         String status = request.getParameter("status");
         String note = request.getParameter("note");
         if (idStr == null || status == null) {
-            response.sendRedirect(request.getContextPath() + "/barista/dashboard");
+            response.sendRedirect(request.getContextPath() + "/barista/dashboard.jsp");
             return;
         }
         try {
@@ -38,21 +38,21 @@ public class UpdateOrderStatusServlet extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/barista/order-detail?id=" + id);
                 } else if ("COMPLETED".equalsIgnoreCase(status) || "CANCELLED".equalsIgnoreCase(status)) {
                     
-                    response.sendRedirect(request.getContextPath() + "/barista/dashboard");
+                    response.sendRedirect(request.getContextPath() + "/barista/dashboard.jsp");
                 } else {
                     
                     String referer = request.getHeader("referer");
                     if (referer != null && referer.contains("order-detail")) {
                         response.sendRedirect(request.getContextPath() + "/barista/order-detail?id=" + id);
                     } else {
-                        response.sendRedirect(request.getContextPath() + "/barista/dashboard");
+                        response.sendRedirect(request.getContextPath() + "/barista/dashboard.jsp");
                     }
                 }
             } else {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Không thể cập nhật trạng thái đơn hàng.");
             }
         } catch (NumberFormatException e) {
-            response.sendRedirect(request.getContextPath() + "/barista/dashboard");
+            response.sendRedirect(request.getContextPath() + "/barista/dashboard.jsp");
         }
     }
 }

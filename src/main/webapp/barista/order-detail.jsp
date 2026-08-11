@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pha chế đơn #${order.id} | Barista Hub</title>
+    <title>Pha chế đơn #${order.billId} | Barista Hub</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
@@ -66,8 +66,8 @@
         <jsp:include page="/common/sidebar.jsp" />
         <main class="main-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                <h1 style="font-size: 1.8rem; font-weight: 800;">Chi Tiết Pha Chế - Đơn #${order.id}</h1>
-                <a href="${pageContext.request.contextPath}/barista/dashboard" class="btn btn-secondary">
+                <h1 style="font-size: 1.8rem; font-weight: 800;">Chi Tiết Pha Chế - Đơn #${order.billId}</h1>
+                <a href="${pageContext.request.contextPath}/barista/dashboard.jsp" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i> Quay lại Dashboard
                 </a>
             </div>
@@ -85,9 +85,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="item" items="${order.items}">
+                            <c:forEach var="item" items="${order.billDetails}">
                                 <tr>
-                                    <td><strong>${item.itemName}</strong></td>
+                                    <td><strong>${item.product.productName}</strong></td>
                                     <td style="text-align: center; font-weight: 700; color: var(--color-primary);">${item.quantity}x</td>
                                     <td style="text-align: right;"><fmt:formatNumber value="${item.price}" pattern="#,###" /> VNĐ</td>
                                     <td style="text-align: right; font-weight: 700;"><fmt:formatNumber value="${item.price * item.quantity}" pattern="#,###" /> VNĐ</td>
@@ -97,7 +97,7 @@
                     </table>
                     <c:if test="${order.status == 'MAKING' || order.status == 'PENDING'}">
                         <form action="${pageContext.request.contextPath}/barista/order-detail" method="POST" style="margin-top: 2rem;">
-                            <input type="hidden" name="id" value="${order.id}">
+                            <input type="hidden" name="id" value="${order.billId}">
                             <input type="hidden" name="status" value="COMPLETED">
                             <button type="submit" class="btn btn-success" style="width: 100%; padding: 1rem; justify-content: center;">
                                 <i class="fas fa-check-double"></i> HOÀN THÀNH PHA CHẾ
@@ -129,7 +129,7 @@
         const countdownBox = document.querySelector(".countdown-box");
         if (!timerElement) return;
 
-        const orderId = "${order.id}";
+        const orderId = "${order.billId}";
         const orderStatus = "${order.status}";
         const storageKey = "barista_timer_target_order_" + orderId;
 

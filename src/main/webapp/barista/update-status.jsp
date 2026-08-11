@@ -61,7 +61,7 @@
     <!-- ĐÃ FIX LỖI: Điều hướng action về đúng orderdetailservlet -->
     <form action="${pageContext.request.contextPath}/barista/order-detail" method="POST">
         <!-- Hidden Order ID -->
-        <input type="hidden" name="id" value="${order.id}">
+        <input type="hidden" name="id" value="${order.billId}">
         
         <!-- Status Radio Group -->
         <div class="form-group">

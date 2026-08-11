@@ -141,11 +141,11 @@
                             </c:when>
                             <c:otherwise>
                                 <c:forEach var="order" items="${pendingOrders}">
-                                    <div class="order-card" data-order-id="${order.id}">
+                                    <div class="order-card" data-order-id="${order.billId}">
                                         <div class="order-card-header">
                                             <div>
-                                                <div class="order-id">Đơn #${order.id} - ${order.tableNumber}</div>
-                                                <div class="order-customer">Khách: ${order.customerName}</div>
+                                                <div class="order-id">Đơn #${order.billId} - ${order.tableNumber}</div>
+                                                <div class="order-customer">Khách: ${order.user.customerName}</div>
                                             </div>
                                         </div>
                                         <ul class="order-items-list">
@@ -166,7 +166,7 @@
                                             
                                             <!-- ĐÃ FIX: Điều hướng form về đúng /barista/order-detail -->
                                             <form action="${pageContext.request.contextPath}/barista/order-detail" method="POST" style="margin: 0;">
-                                                <input type="hidden" name="id" value="${order.id}">
+                                                <input type="hidden" name="id" value="${order.billId}">
                                                 <input type="hidden" name="status" value="MAKING">
                                                 <input type="hidden" name="note" value="Đã nhận đơn">
                                                 <button type="submit" class="btn"><i class="fas fa-play"></i> Nhận đơn (Making)</button>
@@ -194,10 +194,10 @@
                             </c:when>
                             <c:otherwise>
                                 <c:forEach var="order" items="${makingOrders}">
-                                    <div class="order-card" data-order-id="${order.id}">
+                                    <div class="order-card" data-order-id="${order.billId}">
                                         <div class="order-card-header">
                                             <div>
-                                                <div class="order-id">Đơn #${order.id} - ${order.tableNumber}</div>
+                                                <div class="order-id">Đơn #${order.billId} - ${order.tableNumber}</div>
                                                 <div class="order-customer">Khách: ${order.customerName}</div>
                                             </div>
                                         </div>
@@ -216,7 +216,7 @@
                                         </ul>
                                         <div class="order-card-footer">
                                             <span class="order-price"><fmt:formatNumber value="${order.totalPrice}" pattern="#,###" /> VNĐ</span>
-                                            <a href="${pageContext.request.contextPath}/barista/order-detail?id=${order.id}" class="btn btn-secondary">
+                                            <a href="${pageContext.request.contextPath}/barista/order-detail?id=${order.billId}" class="btn btn-secondary">
                                                 <i class="fas fa-eye"></i> Pha chế & Chi tiết
                                             </a>
                                         </div>

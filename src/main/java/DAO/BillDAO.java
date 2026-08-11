@@ -13,13 +13,11 @@ import jakarta.persistence.TypedQuery;
 
 public class BillDAO {
 
-    private EntityManagerFactory emf;
-    private EntityManager em;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("PolyCoffee");;
+    private EntityManager em = emf.createEntityManager();;
 
     public BillDAO() {
 
-        emf = Persistence.createEntityManagerFactory("PolyCoffee");
-        em = emf.createEntityManager();
     }
     
     
