@@ -13,5 +13,5 @@ socket.onmessage = function(event) {
     else location.reload();
 };
 
-//nhúng dòng này và barista.jsp
-<script src="ScriptWebSocket.js"></script>
+// nhúng dòng này và barista.jsp
+// <script src="ScriptWebSocket.js"></script>
