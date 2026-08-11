@@ -13,7 +13,7 @@
     <c:set var="activeStatus" value="${not empty currentStatus ? currentStatus : param.status}" />
 
     <li class="menu-item ${uri == '/barista/dashboard' ? 'active' : ''}">
-        <a href="${pageContext.request.contextPath}/barista/dashboard">
+        <a href="${pageContext.request.contextPath}/barista/dashboard.jsp">
             <i class="fas fa-chart-line"></i>
             <span>Dashboard</span>
         </a>

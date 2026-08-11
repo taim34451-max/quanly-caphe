@@ -84,14 +84,14 @@
                     <tbody>
                         <c:forEach var="order" items="${orders}">
                             <tr>
-                                <td style="font-weight: 700; color: var(--color-primary);">#${order.id}</td>
-                                <td style="font-weight: 600;">${order.customerName}</td>
+                                <td style="font-weight: 700; color: var(--color-primary);">#${order.billId}</td>
+                                <td style="font-weight: 600;">${order.user.userId}</td>
                                 <td><strong>${order.tableNumber}</strong></td>
                                 <td><span class="status-badge ${order.status.toLowerCase()}">${order.status}</span></td>
-                                <td style="color: var(--color-text-secondary);">${order.formattedCreatedAt}</td>
-                                <td style="font-weight: 700;"><fmt:formatNumber value="${order.totalPrice}" pattern="#,###" /> VNĐ</td>
+                                <td style="color: var(--color-text-secondary);">${order.createdDate}</td>
+                                <td style="font-weight: 700;"><fmt:formatNumber value="${order.total}" pattern="#,###" /> VNĐ</td>
                                 <td>
-                                    <a href="${pageContext.request.contextPath}/barista/order-detail?id=${order.id}" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
+                                    <a href="${pageContext.request.contextPath}/barista/order-detail?id=${order.billId}" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
                                         <i class="fas fa-eye"></i> Chi tiết
                                     </a>
                                 </td>

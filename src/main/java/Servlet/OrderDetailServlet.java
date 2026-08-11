@@ -75,7 +75,7 @@ public class OrderDetailServlet extends HttpServlet {
             Map<String, Integer> counts = orderDAO.getStatusCounts();
             request.setAttribute("counts", counts);
             
-            request.getRequestDispatcher("/views/barista/order-detail.jsp").forward(request, response);
+            request.getRequestDispatcher("/barista/order-detail.jsp").forward(request, response);
             
         } catch (NumberFormatException e) {
             response.sendRedirect(request.getContextPath() + "/barista/dashboard");

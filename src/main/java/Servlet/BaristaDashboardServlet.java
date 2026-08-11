@@ -36,6 +36,6 @@ public class BaristaDashboardServlet extends HttpServlet {
         request.setAttribute("pendingOrders", pendingOrders);
         request.setAttribute("makingOrders", makingOrders);
        
-        request.getRequestDispatcher("/views/barista/dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("/barista/dashboard.jsp").forward(request, response);
     }
 }

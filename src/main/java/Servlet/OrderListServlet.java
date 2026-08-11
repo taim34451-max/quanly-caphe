@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 
-@WebServlet(urlPatterns = "/barista/orders")
+@WebServlet(urlPatterns = "/barista/orders/*")
 public class OrderListServlet extends HttpServlet {
     private final BillDAO orderDAO = new BillDAO();
     @Override
@@ -33,6 +33,6 @@ public class OrderListServlet extends HttpServlet {
         Map<String, Integer> counts = orderDAO.getStatusCounts();
         request.setAttribute("counts", counts);
        
-        request.getRequestDispatcher("/views/barista/order-list.jsp").forward(request, response);
+        request.getRequestDispatcher("/barista/order-list.jsp").forward(request, response);
     }
 }
