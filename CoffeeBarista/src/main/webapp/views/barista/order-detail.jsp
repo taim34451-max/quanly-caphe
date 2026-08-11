@@ -1,6 +1,6 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -33,7 +33,6 @@
         .menu-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.5rem; }
         .menu-item a { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; color: var(--color-text-secondary); text-decoration: none; border-radius: 12px; font-weight: 500; }
         
-        /* CẬP NHẬT GRADIENT CHO MENU ACTIVE (Thay nâu thành xanh đại dương) */
         .menu-item.active a { color: #ffffff; background: linear-gradient(135deg, var(--color-primary) 0%, #0284C7 100%); font-weight: 700; }
         
         .menu-badge { margin-left: auto; background-color: var(--bg-sidebar); color: var(--color-primary); padding: 0.2rem 0.5rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700; }
@@ -43,7 +42,6 @@
         .detail-layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: 2rem; }
         .detail-main { background: var(--bg-surface); border: 1px solid var(--color-border); border-radius: 20px; padding: 2rem; }
         
-        /* CẬP NHẬT MÀU NỀN MỜ CỦA HỘP ĐẾM GIỜ (Đồng bộ với RGB của màu Xanh primary) */
         .countdown-box { background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(56, 189, 248, 0.02) 100%); border: 1.5px solid var(--color-primary); border-radius: 20px; padding: 1.5rem; text-align: center; margin-bottom: 2rem; }
         
         .countdown-timer { font-size: 3rem; font-weight: 800; color: var(--color-primary); }
@@ -54,10 +52,8 @@
         .radio-group { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
         .radio-label { display: flex; align-items: center; justify-content: center; padding: 0.75rem; background: var(--bg-sidebar); border: 1px solid var(--color-border); border-radius: 12px; cursor: pointer; font-weight: 600; }
         
-        /* CẬP NHẬT GRADIENT CHO NÚT BẤM CHÍNH */
         .btn { background: linear-gradient(135deg, var(--color-primary) 0%, #0284C7 100%); color: #ffffff; border: none; padding: 0.65rem 1.2rem; border-radius: 10px; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
         
-        /* Nút màu xanh lá cây thành công giữ nguyên */
         .btn-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; }
         .btn-secondary { background: var(--bg-surface-hover); color: var(--color-text); border: 1px solid var(--color-border); }
         .detail-items-table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
@@ -99,21 +95,21 @@
                             </c:forEach>
                         </tbody>
                     </table>
-<c:if test="${order.status == 'MAKING' || order.status == 'PENDING'}">
-    <form action="${pageContext.request.contextPath}/barista/order-detail" method="POST" style="margin-top: 2rem;">
-        <input type="hidden" name="id" value="${order.id}">
-        <input type="hidden" name="status" value="COMPLETED">
-        <button type="submit" class="btn btn-success" style="width: 100%; padding: 1rem; justify-content: center;">
-            <i class="fas fa-check-double"></i> HOÀN THÀNH PHA CHẾ
-        </button>
-    </form>
-</c:if>
+                    <c:if test="${order.status == 'MAKING' || order.status == 'PENDING'}">
+                        <form action="${pageContext.request.contextPath}/barista/order-detail" method="POST" style="margin-top: 2rem;">
+                            <input type="hidden" name="id" value="${order.id}">
+                            <input type="hidden" name="status" value="COMPLETED">
+                            <button type="submit" class="btn btn-success" style="width: 100%; padding: 1rem; justify-content: center;">
+                                <i class="fas fa-check-double"></i> HOÀN THÀNH PHA CHẾ
+                            </button>
+                        </form>
+                    </c:if>
                 </div>
 
                 <div>
                     <div class="countdown-box">
                         <div style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Thời Gian Pha Chế</div>
-                        <div class="countdown-timer" id="countdown-timer" data-created-at="${order.createdAt != null ? order.createdAt.time : 0}">10:00</div>
+                        <div class="countdown-timer" id="countdown-timer">10:00</div>
                     </div>
 
                     <div class="form-card">
@@ -123,40 +119,71 @@
             </div>
         </main>
     </div>
-    <script>window.contextPath = '${pageContext.request.contextPath}';</script>
+
+       <script>window.contextPath = '${pageContext.request.contextPath}';</script>
     <script src="${pageContext.request.contextPath}/views/assets/js/main.js"></script>
+    
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const timerElement = document.getElementById("countdown-timer");
         const countdownBox = document.querySelector(".countdown-box");
-        
         if (!timerElement) return;
 
-// Dùng 'empty' để đảm bảo an toàn tuyệt đối nếu Java không truyền biến
-let timeRemaining = ${empty remainingSeconds ? 600 : remainingSeconds};
+        const orderId = "${order.id}";
+        const orderStatus = "${order.status}";
+        const storageKey = "barista_timer_target_order_" + orderId;
 
-        const timerInterval = setInterval(function() {
-            let minutes = Math.floor(timeRemaining / 60);
-            let seconds = timeRemaining % 60;
+        // 1. Nếu đơn đã Hoàn Thành hoặc Hủy Đơn -> Hiển thị 00:00 & dọn dẹp bộ nhớ
+        if (orderStatus === 'COMPLETED' || orderStatus === 'CANCELLED' || orderStatus === 'Hoàn Thành' || orderStatus === 'Hủy Đơn') {
+            timerElement.textContent = "00:00";
+            localStorage.removeItem(storageKey);
+            return;
+        }
 
-            let displayMinutes = minutes < 10 ? "0" + minutes : minutes;
-            let displaySeconds = seconds < 10 ? "0" + seconds : seconds;
+        // 2. Nếu là Đơn Mới (PENDING) -> Đứng yên 10:00, chưa kích hoạt đếm ngược
+        if (orderStatus === 'PENDING' || orderStatus === 'Đơn Mới') {
+            timerElement.textContent = "10:00";
+            localStorage.removeItem(storageKey);
+            return;
+        }
+
+        // 3. Đã bấm ĐANG PHA (MAKING) -> Kích hoạt đếm ngược 10 phút liên tục
+        let serverRemainingSeconds = ${empty remainingSeconds ? 600 : remainingSeconds};
+        let targetTime = localStorage.getItem(storageKey);
+
+        if (!targetTime || parseInt(targetTime) <= Date.now()) {
+            targetTime = Date.now() + (serverRemainingSeconds * 1000);
+            localStorage.setItem(storageKey, targetTime);
+        } else {
+            targetTime = parseInt(targetTime);
+        }
+
+        function updateTimer() {
+            const now = Date.now();
+            const diff = targetTime - now;
+
+            if (diff <= 0) {
+                timerElement.textContent = "00:00";
+                if (countdownBox) countdownBox.classList.add("overdue");
+                return;
+            }
+
+            const minutes = Math.floor(diff / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
+
+            const displayMinutes = minutes < 10 ? "0" + minutes : minutes;
+            const displaySeconds = seconds < 10 ? "0" + seconds : seconds;
 
             timerElement.textContent = displayMinutes + ":" + displaySeconds;
 
-            if (timeRemaining > 0) {
-                timeRemaining--; 
-            } else {
-                clearInterval(timerInterval); 
-                timerElement.textContent = "00:00";
-                
-                // Tự động nhấp nháy đỏ khi hết giờ
-                if(countdownBox) {
-                    countdownBox.classList.add("overdue"); 
-                }
+            if (diff < 2 * 60 * 1000 && countdownBox) {
+                countdownBox.style.borderColor = '#fbbf24';
             }
-        }, 1000); 
+        }
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
     });
-</script>
+    </script>
 </body>
 </html>

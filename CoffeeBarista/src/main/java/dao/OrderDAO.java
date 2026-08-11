@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,21 +15,7 @@ import utils.DBConnection;
 
 public class OrderDAO {
 
-    // Danh sách lưu tạm bộ nhớ nếu chưa nối được Database SQL Server
-    private static final List<Order> mockOrders = new ArrayList<>();
-
-    static {
-        // Khởi tạo đơn mẫu thử nghiệm nếu chưa kết nối được DB
-        Order sampleOrder = new Order(3, "Khách Bàn 06", "Bàn 06", "PENDING", 85000.0, new Date());
-        sampleOrder.setNote("Giao gấp cho bànVIP");
-        List<OrderItem> items = new ArrayList<>();
-        items.add(new OrderItem(1, 3, "Cà Phê Sữa Đá - Ít đường", 2, 35000.0, "Ít đá"));
-        items.add(new OrderItem(2, 3, "Bánh Croissant", 1, 15000.0, "Nóng"));
-        sampleOrder.setItems(items);
-        mockOrders.add(sampleOrder);
-    }
-
-    // 1. Lấy thống kê số lượng đơn theo từng trạng thái
+    // 1. Lấy thống kê số lượng đơn theo từng trạng thái từ Database
     public Map<String, Integer> getStatusCounts() {
         Map<String, Integer> counts = new HashMap<>();
         counts.put("PENDING", 0);
@@ -48,7 +33,7 @@ public class OrderDAO {
         return counts;
     }
 
-    // 2. Lấy danh sách đơn hàng theo trạng thái (Hỗ trợ đọc DB thật & Fallback dữ liệu mẫu)
+    // 2. Lấy danh sách đơn hàng theo trạng thái trực tiếp từ Database SQL Server
     public List<Order> getOrdersByStatus(String statusFilter) {
         List<Order> orders = new ArrayList<>();
         String sql = "SELECT * FROM Bill ";
@@ -81,17 +66,10 @@ public class OrderDAO {
                 }
             }
         } catch (Exception e) {
-            System.err.println("⚠️ Chưa đọc được DB thật, dùng dữ liệu mẫu: " + e.getMessage());
+            System.err.println("❌ LỖI LẤY DANH SÁCH ĐƠN HÀNG TỪ DATABASE: " + e.getMessage());
+            e.printStackTrace();
         }
 
-        // Nếu DB rỗng hoặc chưa nối được, trả về danh sách mẫu để hiển thị ngay
-        if (orders.isEmpty()) {
-            for (Order mo : mockOrders) {
-                if (statusFilter == null || "ALL".equalsIgnoreCase(statusFilter) || statusFilter.equalsIgnoreCase(mo.getStatus())) {
-                    orders.add(mo);
-                }
-            }
-        }
         return orders;
     }
 
@@ -106,7 +84,7 @@ public class OrderDAO {
         return null;
     }
 
-    // 4. Cập nhật Trạng thái & Ghi chú Đơn hàng
+    // 4. Cập nhật Trạng thái & Ghi chú Đơn hàng trực tiếp vào Database SQL Server
     public boolean updateOrderStatus(int billId, String status, String note) {
         String sql = "UPDATE Bill SET Status = ?, Note = ? WHERE BillId = ?";
         boolean updatedInDB = false;
@@ -121,17 +99,10 @@ public class OrderDAO {
                 }
             }
         } catch (Exception e) {
-            System.err.println("⚠️ Cập nhật DB thất bại, cập nhật vào dữ liệu mẫu: " + e.getMessage());
+            System.err.println("❌ CẬP NHẬT TRẠNG THÁI ĐƠN HÀNG TRÊN DATABASE THẤT BẠI: " + e.getMessage());
+            e.printStackTrace();
         }
 
-        // Cập nhật cả trong danh sách tạm thời
-        for (Order mo : mockOrders) {
-            if (mo.getId() == billId) {
-                mo.setStatus(status.toUpperCase());
-                mo.setNote(note);
-                updatedInDB = true;
-            }
-        }
         return updatedInDB;
     }
 
@@ -139,7 +110,7 @@ public class OrderDAO {
         return updateOrderStatus(id, status, note);
     }
 
-    // Helper: Lấy danh sách các món trong đơn hàng từ DB
+    // Helper: Lấy danh sách các món trong đơn hàng trực tiếp từ CSDL
     private List<OrderItem> getOrderItems(Connection conn, int billId) {
         List<OrderItem> items = new ArrayList<>();
         String sql = "SELECT bd.*, p.ProductName FROM BillDetail bd " +
@@ -160,6 +131,7 @@ public class OrderDAO {
                 ));
             }
         } catch (SQLException e) {
+            System.err.println("❌ LỖI LẤY DỮ LIỆU BILL DETAIL TỪ DATABASE: " + e.getMessage());
             e.printStackTrace();
         }
         return items;
