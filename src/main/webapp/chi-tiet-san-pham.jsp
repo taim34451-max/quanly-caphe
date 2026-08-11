@@ -44,7 +44,7 @@
                 
               
                 <!-- FORM ĐẶT HÀNG CÓ CHỨA LOGIC CHỌN SIZE -->
-                <form action="gio-hang.jsp" method="GET" id="order-form" style="margin-bottom: 20px;">
+                <form action="/ORDER" method="GET" id="order-form" style="margin-bottom: 20px;">
                     <input type="hidden" name="id" id="detail-id-input" value="">
                     
                     <!-- Khối chọn Size (Chỉ hiện cho nước) -->
@@ -137,11 +137,11 @@
             <div class="footer-column copyright-column">
                 <p class="copy-text">© 2026 Highlands Coffee.<br>Tất cả các quyền được bảo lưu.</p>
             </div>
-        </div>
+        </div>S
     </footer>
 
     <!-- Gọi file JavaScript điều khiển logic động cho trang Chi tiết -->
-	<script>
+	<!-- <script>
 
     const sizes = document.querySelectorAll('input[name="size"]');
     const price = document.getElementById("detail-price");
@@ -166,6 +166,6 @@
     // Chạy ngay khi vừa mở trang
     updatePrice();
 
-</script>
+</script> -->
 </body>
 </html>

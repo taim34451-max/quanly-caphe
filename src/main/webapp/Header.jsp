@@ -30,6 +30,7 @@
             		<c:when test="${sessionScope.user.role == 'USER' }">
             			<a href="${ctx}/Menu">Thực đơn</a>
                     	<a href="gio-hang.jsp">Giỏ hàng</a>
+                    	<a href="${ctx}/Menu">Thực đơn</a>
                     	<a href="${ctx}/Logout">Logout</a>
             		</c:when>
             		<c:otherwise>
@@ -38,6 +39,7 @@
 			            <span style="color: #fff; margin: 0 15px;">|</span>
 			            <a href="dang-ky.jsp" style="color: var(--primary-color); font-weight: bold;">Đăng ký</a>
 			            <a href="${ctx }/User/dang-nhap.jsp">Đăng nhập</a>
+			            <a href="">Quên mật khẩu</a>
             		</c:otherwise>
             	</c:choose>
             	
