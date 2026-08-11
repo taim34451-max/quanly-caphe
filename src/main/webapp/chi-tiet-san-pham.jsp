@@ -141,6 +141,7 @@
     </footer>
 
     <!-- Gọi file JavaScript điều khiển logic động cho trang Chi tiết -->
+
 	<script>
 
     const sizes = document.querySelectorAll('input[name="size"]');
