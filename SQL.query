@@ -1,0 +1,62 @@
+USE PolyCoffee;
+GO
+
+-- =============================================
+-- XÓA DỮ LIỆU CŨ
+-- =============================================
+DELETE FROM BillDetail;
+DELETE FROM SizePrice;
+DELETE FROM Product;
+GO
+
+-- =============================================
+-- DATA: Product 
+-- =============================================
+SET IDENTITY_INSERT Product ON;
+
+INSERT INTO Product
+    (ProductId, ProductName, Category, IsAvailable, ProductIMG, DrinkDescription, Price)
+VALUES
+    (1, N'Phindi Hạnh Nhân', N'Cà phê', 1, N'hinh-anh/imgs/PHINDI_HANH_NHAN.jpg', N'Cà phê Phin thế hệ mới kết hợp Hạnh Nhân.', NULL),
+    (2, N'Trà Sen Vàng', N'Trà', 1, N'hinh-anh/imgs/tsv_cu_nang.jpg', N'Trà Oolong thanh mát, hạt sen thơm bùi.', NULL),
+    (3, N'Freeze Trà Xanh', N'Freeze', 1, N'hinh-anh/imgs/freeze_tra_xanh.jpg', N'Đá xay đậm vị trà xanh Tây Bắc.', NULL),
+    (4, N'Cà Phê Sữa Đá', N'Cà phê', 1, N'hinh-anh/imgs/PHIN_SUA_DA.jpg', N'Đậm đà hương vị cà phê Phin Việt Nam.', NULL),
+    (5, N'Phin Sữa Đá', N'Cà phê', 1, N'hinh-anh/imgs/phin_sua_da.jpg', N'Sự kết hợp hoàn hảo giữa cà phê Phin và sữa đặc.', NULL),
+    (6, N'Phin Đen Đá', N'Cà phê', 1, N'hinh-anh/imgs/phin_den_da.jpg', N'Cà phê Phin đậm đà, nguyên bản không đường.', NULL),
+    (7, N'Bạc Xỉu Đá', N'Cà phê', 1, N'hinh-anh/imgs/bac_siu_1.jpg', N'Bạc xỉu chính gốc Sài Gòn.', NULL),
+    (8, N'Phin Sữa Nóng', N'Cà phê', 1, N'hinh-anh/imgs/PHIN_SUA_NONG.jpg', N'Cà phê Phin phục vụ nóng hổi.', NULL),
+    (9, N'Bánh Phô Mai Trà Xanh', N'Bánh', 1, N'hinh-anh/imgs/banh_pho_mai_tra_xanh.jpg', N'Bánh phô mai mềm mịn tan trong miệng.', 25000),
+    (10, N'Bánh Mì Que Gà', N'Bánh', 1, N'hinh-anh/imgs/bmq_ga.jpg', N'Bánh mì que giòn rụm với nhân thịt gà xé.', 19000),
+    (11, N'Bánh Tiramisu', N'Bánh', 1, N'hinh-anh/imgs/BANH_TIRAMISU.jpg', N'Bánh Tiramisu chuẩn vị Ý.', 35000),
+    (12, N'Bánh Chuối', N'Bánh', 1, N'hinh-anh/imgs/BANH_CHUOI.jpg', N'Bánh chuối nướng truyền thống.', 29000),
+    (13, N'Trà Thanh Đào', N'Trà', 1, N'hinh-anh/imgs/tra_thanh_dao.jpg', N'Trà đào chua ngọt thanh mát.', NULL),
+    (14, N'Trà Thạch Vải', N'Trà', 1, N'hinh-anh/imgs/TRA_THACH_VAI_1.jpg', N'Trà đen nguyên lá kết hợp thạch vải.', NULL),
+    (15, N'Cookies & Cream', N'Freeze', 1, N'hinh-anh/imgs/FREEZE_COOKIES.jpg', N'Thức uống đá xay kết hợp bánh oreo.', NULL),
+    (16, N'Trà Xanh Đậu Đỏ', N'Trà', 1, N'hinh-anh/imgs/TRA_XANH_DAU_DO.jpg', N'Sự kết hợp hoàn hảo giữa trà xanh thanh mát và lớp topping đậu đỏ ngọt bùi.', NULL);
+
+SET IDENTITY_INSERT Product OFF;
+GO
+
+-- =============================================
+-- DATA: SizePrice
+-- =============================================
+SET IDENTITY_INSERT SizePrice ON;
+
+INSERT INTO SizePrice
+    (SizeId, ProductId, SizeS, SizeM, SizeL)
+VALUES
+    (1, 1, 49000, 55000, 59000),
+    (2, 2, 45000, 55000, 65000),
+    (3, 3, 55000, 65000, 75000),
+    (4, 4, 29000, 35000, 39000),
+    (5, 5, 29000, 35000, 39000),
+    (6, 6, 29000, 35000, 39000),
+    (7, 7, 33000, 39000, 45000),
+    (8, 8, 29000, 35000, 39000),
+    (13, 13, 45000, 55000, 65000),
+    (14, 14, 45000, 55000, 65000),
+    (15, 15, 55000, 65000, 75000),
+    (16, 16, 45000, 55000, 65000);
+
+SET IDENTITY_INSERT SizePrice OFF;
+GO
