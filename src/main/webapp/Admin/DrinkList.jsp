@@ -12,7 +12,7 @@
 
 <title>Drink Management</title>
 
-
+<link rel="stylesheet" href="dinh-dang.css">
 <style>
 * {
 	box-sizing: border-box;
@@ -276,14 +276,14 @@ tbody tr:hover {
 	}
 }
 </style>
-
+<link ">
 </head>
 
 
 <body>
 
-
-	<div class="container">
+<%@ include file="//Header.jsp" %>
+	<div class="container" style="margin-top: 50px">
 
 		<!-- =========================
          HEADER
@@ -321,22 +321,29 @@ tbody tr:hover {
 							<tbody>
 								<c:forEach var="d" items="${list}">
 									<tr>
-										<td>${d.idDrink}</td>
+										<td>${d.productId}</td>
 										<td><c:choose>
-												<c:when test="${not empty d.drinkIMG}">
+												<c:when test="${not empty d.productIMG}">
 													<img
-														src="${pageContext.request.contextPath}/images/${d.drinkIMG}.jpg"
-														class="drink-img" alt="${d.drinkName}">
+														src="${pageContext.request.contextPath}/hinh-anh/imgs/${d.productIMG}"
+													    width="70"
+													    height="70"
+													    class="drink-img"
+													    alt="${d.productName}">
 												</c:when>
 												<c:otherwise>
 													<div class="no-image">No Image</div>
 												</c:otherwise>
 											</c:choose></td>
-										<td><strong> ${d.drinkName} </strong></td>
-										<td><span class="price"> ${d.drinkPrice} VNĐ </span></td>
+										<td><strong> ${d.productName} </strong></td>
+										<td>
+										<c:choose>
+						            	<c:when test="${d.category != 'Bánh'}"><span class="new">${d.sizePrices.sizeS}đ</span></c:when>
+						            	<c:otherwise><span class="new">${d.price}đ</span></c:otherwise>
+						            	</c:choose></td>
 										<td><span class="category"> ${d.category} </span></td>
 										<td><c:choose>
-												<c:when test="${d.drinkActive}">
+												<c:when test="${d.isAvailable}">
 													<span class="status available"> Available </span>
 												</c:when>
 												<c:otherwise>
@@ -346,10 +353,10 @@ tbody tr:hover {
 										<td>
 											<div class="actions">
 												<a
-													href="${pageContext.request.contextPath}/DrinkServlet?action=update&id=${d.idDrink}"
+													href="${pageContext.request.contextPath}/DrinkServlet?action=update&id=${d.productId}"
 													class="btn btn-edit"> Edit </a> 
 												<a
-													href="${pageContext.request.contextPath}/DrinkServlet?action=delete&id=${d.idDrink}"
+													href="${pageContext.request.contextPath}/DrinkServlet?action=delete&id=${d.productId}"
 													class="btn btn-delete"
 													onclick="return confirm('Bạn có chắc muốn xóa món này không?');">
 													Delete </a>

@@ -17,7 +17,7 @@
     <div id="banh-mi"></div>
 
     <!-- HEADER CHUẨN ĐỒNG BỘ -->
-<%@ include file="Header.jsp"%>>
+<%@ include file="Header.jsp"%>
 
     <section class="section">
         <h2 class="page-title">Thực Đơn Highlands</h2>
@@ -34,9 +34,14 @@
         <c:forEach var="u" items="${listItem}">
         	<div class="item">
         		<a href="${ctx }/chi_tiet/${u.productId}" class="product-link">
-            	<img src="${ctx}/hinh-anh/imgs/${u.productId}.jpg" alt="Phindi Hạnh Nhân">
+            	<img src="${ctx}/hinh-anh/imgs/${u.productIMG}" alt="Phindi Hạnh Nhân">
             	<p>${u.productName}</p>
-            	<span class="new">${u.sizePrices.sizeS}</span>
+            	<c:choose>
+            	<c:when test="${u.category != 'Bánh'}"><span class="new">${u.sizePrices.sizeS}đ</span></c:when>
+            	<c:otherwise><span class="new">${u.price}đ</span></c:otherwise>
+            	</c:choose>
+            	
+            	
             	</a>
             </div>
         </c:forEach>

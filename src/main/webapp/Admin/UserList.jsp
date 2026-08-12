@@ -11,6 +11,8 @@
 
 <title>User Management</title>
 
+
+<link rel="stylesheet" href="dinh-dang.css">
 <style>
 
     * {
@@ -288,8 +290,8 @@
 
 <body>
 
-
-<div class="container">
+<%@ include file="//Header.jsp" %>
+<div class="container" style="margin-top: 50px">
 
 
     <!-- =========================

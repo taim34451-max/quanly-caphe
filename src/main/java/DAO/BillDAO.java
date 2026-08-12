@@ -125,7 +125,7 @@ public class BillDAO {
     // ==========================================
 
     public List<Bill> getOrdersByStatus(String statusFilter) {
-
+    	em.clear();
         if (statusFilter == null
                 || statusFilter.trim().isEmpty()
                 || "ALL".equalsIgnoreCase(statusFilter)) {

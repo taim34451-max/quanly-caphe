@@ -27,7 +27,7 @@ public class OrderDetailServlet extends HttpServlet {
         
         String idStr = request.getParameter("id");
         if (idStr == null || idStr.trim().isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/barista/dashboard.jsp");
+            response.sendRedirect(request.getContextPath() + "/barista/dashboard");
             return;
         }
         
@@ -78,7 +78,7 @@ public class OrderDetailServlet extends HttpServlet {
             request.getRequestDispatcher("/barista/order-detail.jsp").forward(request, response);
             
         } catch (NumberFormatException e) {
-            response.sendRedirect(request.getContextPath() + "/barista/dashboard.jsp");
+            response.sendRedirect(request.getContextPath() + "/barista/dashboard");
         }
     }
     
@@ -91,7 +91,9 @@ public class OrderDetailServlet extends HttpServlet {
         String note = request.getParameter("note");
         
         if (idStr == null || idStr.trim().isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/barista/dashboard.jsp");
+        	 response.sendRedirect(
+        		        request.getContextPath() + "/barista/dashboard"
+        		    );
             return;
         }
         
@@ -100,14 +102,14 @@ public class OrderDetailServlet extends HttpServlet {
             
             // Cập nhật trạng thái vào CSDL
             boolean isUpdated = orderDAO.updateOrderStatus(id, newStatus, note); 
-
+            System.out.println(isUpdated);
             if (isUpdated) {
                 // Nếu bấm Hoàn Thành hoặc Hủy Đơn -> Quay về ngay Dashboard
                 if ("COMPLETED".equalsIgnoreCase(newStatus) || "CANCELLED".equalsIgnoreCase(newStatus) ||
                     "Hoàn Thành".equalsIgnoreCase(newStatus) || "Hủy Đơn".equalsIgnoreCase(newStatus)) {
                     
                     orderStartTimes.remove(id); 
-                    response.sendRedirect(request.getContextPath() + "/barista/dashboard.jsp");
+                    response.sendRedirect(request.getContextPath() + "/barista/dashboard");
                     return;
                 }
             }
@@ -116,7 +118,7 @@ public class OrderDetailServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/barista/order-detail?id=" + id);
             
         } catch (NumberFormatException e) {
-            response.sendRedirect(request.getContextPath() + "/barista/dashboard.jsp");
+            response.sendRedirect(request.getContextPath() + "/barista/dashboard");
         }
     }
 }

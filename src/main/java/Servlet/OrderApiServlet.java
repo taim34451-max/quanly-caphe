@@ -40,6 +40,7 @@ public class OrderApiServlet extends HttpServlet {
         
         List<Map<String, Object>> serializedOrders = new ArrayList<>();
         for (Bill order : orders) {
+        	
             Map<String, Object> orderMap = new HashMap<>();
             orderMap.put("id", order.getBillId());
             orderMap.put("tableNumber", order.getTableNumber());
@@ -48,6 +49,10 @@ public class OrderApiServlet extends HttpServlet {
             } else {
                 orderMap.put("customerName", "Khách");
             }
+            System.out.println(
+            	    "API BILL #" + order.getBillId()
+            	    + " STATUS = [" + order.getStatus() + "]"
+            	);
             orderMap.put("status", order.getStatus());
             orderMap.put("note", order.getNote() != null ? order.getNote() : "");
             orderMap.put("totalPrice", order.getTotal());

@@ -20,8 +20,8 @@
             	<c:choose>
             		<c:when test="${sessionScope.user.role == 'ADMIN' }">
             
-            			<a href="quan-ly-thuc-don.jsp">QL Thực đơn</a>
-	                    <a href="quan-ly-kho.jsp">QL Kho hàng</a>
+            			<a href="${ctx }/DrinkServlet">QL Thực đơn</a>
+	                    
 	                    <a href="${ctx }/UserList">QL Nhân viên</a>
 	                    <a href="bao-cao-doanh-thu.jsp">Báo cáo</a>
 	                    <a>Xin chào, ${sessionScope.user.userName}</a>

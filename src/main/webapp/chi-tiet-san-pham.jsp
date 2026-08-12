@@ -16,7 +16,7 @@
         <div class="product-detail-container">
             <!-- PHẦN HÌNH ẢNH & TABS -->
             <div class="detail-image">
-                <img src="${ctx}/hinh-anh/imgs/${item.productId}.jpg" alt="Phindi Hạnh Nhân">
+                <img src="${ctx}/hinh-anh/imgs/${item.productIMG}" alt="Phindi Hạnh Nhân">
                 
                 <div class="product-tabs" style="margin-top: 20px;">
                     <input type="radio" name="det-tabs" id="det1" checked>

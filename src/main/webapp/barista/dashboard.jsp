@@ -145,7 +145,7 @@
                                         <div class="order-card-header">
                                             <div>
                                                 <div class="order-id">Đơn #${order.billId} - ${order.tableNumber}</div>
-                                                <div class="order-customer">Khách: ${order.user.customerName}</div>
+                                                <div class="order-customer">Khách: ${order.user.userName}</div>
                                             </div>
                                         </div>
                                         <ul class="order-items-list">
@@ -198,7 +198,7 @@
                                         <div class="order-card-header">
                                             <div>
                                                 <div class="order-id">Đơn #${order.billId} - ${order.tableNumber}</div>
-                                                <div class="order-customer">Khách: ${order.customerName}</div>
+                                                <div class="order-customer">Khách: ${order.userName}</div>
                                             </div>
                                         </div>
                                         <ul class="order-items-list">

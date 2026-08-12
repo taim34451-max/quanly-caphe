@@ -41,6 +41,8 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<BillDetail> billDetails;
     
-    @OneToOne(mappedBy = "product")
+    @OneToOne(mappedBy = "product",
+    	    cascade = CascadeType.ALL,
+    	    orphanRemoval = true)
     private SizePrice sizePrices;
 }
