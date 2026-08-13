@@ -43,6 +43,7 @@ public class UserList extends HttpServlet {
 		if ("add".equals(action)) {
 
 			request.setAttribute("mode", "create");
+			request.setAttribute("user", null);
 
 			request.getRequestDispatcher("/Admin/UserForm.jsp").forward(request, response);
 		}

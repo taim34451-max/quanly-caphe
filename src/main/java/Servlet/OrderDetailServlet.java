@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import DAO.BillDAO;
 import Entity.Bill;
+import WebSocket.WebSocket;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -82,6 +83,11 @@ public class OrderDetailServlet extends HttpServlet {
         }
     }
     
+    
+    
+    
+    
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
@@ -89,7 +95,7 @@ public class OrderDetailServlet extends HttpServlet {
         String idStr = request.getParameter("id");
         String newStatus = request.getParameter("status");
         String note = request.getParameter("note");
-        
+        WebSocket.broadcast("STATUS_CHANGED");
         if (idStr == null || idStr.trim().isEmpty()) {
         	 response.sendRedirect(
         		        request.getContextPath() + "/barista/dashboard"
@@ -102,14 +108,16 @@ public class OrderDetailServlet extends HttpServlet {
             
             // Cập nhật trạng thái vào CSDL
             boolean isUpdated = orderDAO.updateOrderStatus(id, newStatus, note); 
-            System.out.println(isUpdated);
+            
             if (isUpdated) {
+            	WebSocket.broadcast("STATUS_CHANGED");
                 // Nếu bấm Hoàn Thành hoặc Hủy Đơn -> Quay về ngay Dashboard
                 if ("COMPLETED".equalsIgnoreCase(newStatus) || "CANCELLED".equalsIgnoreCase(newStatus) ||
                     "Hoàn Thành".equalsIgnoreCase(newStatus) || "Hủy Đơn".equalsIgnoreCase(newStatus)) {
                     
                     orderStartTimes.remove(id); 
-                    response.sendRedirect(request.getContextPath() + "/barista/dashboard");
+//                    request.getRequestDispatcher("/barista/dashboard").forward(request, response);
+                    response.sendRedirect(request.getContextPath() + "/barista/dashboard.jsp");
                     return;
                 }
             }

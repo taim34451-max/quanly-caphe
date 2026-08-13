@@ -28,9 +28,13 @@ public class Users {
 
     @Column(name = "Role")
     private String role;
+    
+    @Column(name = "Email")
+    private String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Bill> bills;
     
     

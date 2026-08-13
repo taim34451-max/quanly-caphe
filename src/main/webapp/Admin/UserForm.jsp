@@ -352,11 +352,12 @@
                 Username <span class="required">*</span>
             </label>
 
-            <input type="text"
-                   name="userName"
-                   value="${user.userName}"
-                   placeholder="Enter username"
-                   required>
+            <!-- USERNAME -->
+		<input type="text"
+		       name="userName"
+		       value="${mode == 'update' ? user.userName : ''}"
+		       placeholder="Enter username"
+		       required>
 
         </div>
 
@@ -370,10 +371,10 @@
             </label>
 
             <input type="password"
-                   name="userPass"
-                   value="${user.userPass}"
-                   placeholder="Enter password"
-                   required>
+		       name="userPass"
+		       value="${mode == 'update' ? user.password : ''}"
+		       placeholder="Enter password"
+		       required>
 
         </div>
 
@@ -387,9 +388,9 @@
             </label>
 
             <input type="text"
-                   name="userPhone"
-                   value="${user.userPhone}"
-                   placeholder="Enter phone number">
+       name="userPhone"
+       value="${mode == 'update' ? user.userPhone : ''}"
+       placeholder="Enter phone number">
 
         </div>
 
@@ -403,9 +404,9 @@
             </label>
 
             <input type="email"
-                   name="userEmail"
-                   value="${user.userEmail}"
-                   placeholder="Enter email">
+       name="userEmail"
+       value="${mode == 'update' ? user.email : ''}"
+       placeholder="Enter email">
 
         </div>
 
@@ -420,25 +421,22 @@
 
             <select name="role" required>
 
-                <option value="">
-                    -- Select Role --
-                </option>
+               <option value="">-- Select Role --</option>
 
-                <option value="Admin"
-                    ${user.role == 'Admin' ? 'selected' : ''}>
-                    Admin
-                </option>
-
-                <option value="Employee"
-                    ${user.role == 'Employee' ? 'selected' : ''}>
-                    Employee
-                </option>
-
-                <option value="Customer"
-                    ${user.role == 'Customer' ? 'selected' : ''}>
-                    Customer
-                </option>
-
+				<option value="ADMIN"
+				    ${mode == 'update' && user.role == 'ADMIN' ? 'selected' : ''}>
+				    ADMIN
+				</option>
+				
+				<option value="BARISTA"
+				    ${mode == 'update' && user.role == 'BARISTA' ? 'selected' : ''}>
+				    BARISTA
+				</option>
+				
+				<option value="USER"
+				    ${mode == 'update' && user.role == 'USER' ? 'selected' : ''}>
+				    USER
+				</option>
             </select>
 
         </div>

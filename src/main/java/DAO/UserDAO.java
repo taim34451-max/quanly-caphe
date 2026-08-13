@@ -25,6 +25,23 @@ public class UserDAO {
             em.close();
         }
     }
+    
+ // Tìm kiếm người dùng theo Email
+    public Users findByEmail(String email) {
+        EntityManager em = getEntityManager();
+        try {
+            String jpql = "SELECT u FROM Users u WHERE u.email = :email";
+            TypedQuery<Users> query = em.createQuery(jpql, Users.class);
+            query.setParameter("email", email);
+            List<Users> list = query.getResultList();
+            return list.isEmpty() ? null : list.get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
 
     // Search by Primary Key (UserId - Integer)
     public Users findById(Integer id) {

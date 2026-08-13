@@ -23,6 +23,8 @@ import Entity.CartItem;
 import Entity.Product;
 import Entity.Users;
 import Ulti.AuthUtil;
+import WebSocket.WebSocket;
+
 
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
@@ -433,6 +435,11 @@ public class CartServlet extends HttpServlet {
 
 
         if (success) {
+        	
+        	String message =
+        	        "{\"type\":\"NEW_ORDER\"}";
+
+        	    WebSocket.broadcast(message);
 
             cart.clear();
 

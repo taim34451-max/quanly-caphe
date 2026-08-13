@@ -5,22 +5,24 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import DAO.BillDAO;
-import WebSocket.WebSocket;
+import Entity.Users;
 
 /**
- * Servlet implementation class BillList
+ * Servlet implementation class History
  */
-@WebServlet("/BillList")
-public class BillList extends HttpServlet {
+@WebServlet("/History")
+public class History extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BillList() {
+    public History() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,11 +32,17 @@ public class BillList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession(false);
+		Users user = (Users) session.getAttribute("user");
 		BillDAO dao = new BillDAO();
-		var list = dao.getOrdersByStatus("");
-		request.setAttribute("BillList", list);
-		request.getRequestDispatcher("/Admin/BillList.jsp").forward(request, response);
+		int id = user.getUserId();
+		
+		var list = dao.FindByIdUser(id);
+		
+		
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/User/history.jsp").forward(request, response);
 	}
 
 	/**

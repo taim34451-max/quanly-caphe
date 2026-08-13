@@ -322,5 +322,47 @@
     <!-- GỌI CÁC FILE SCRIPT -->
 <!--     <script src="main.js"></script>
     <script src="gio-hang.js"></script> -->
+    
+<script>
+
+const socket = new WebSocket(
+    "ws://localhost:8080/PolyCoffee/websocket"
+);
+
+socket.onopen = function () {
+
+    console.log(
+        "Customer WebSocket đã kết nối"
+    );
+
+};
+
+socket.onmessage = function (event) {
+
+    console.log(
+        "Customer nhận:",
+        event.data
+    );
+
+};
+
+socket.onerror = function (error) {
+
+    console.error(
+        "Customer WebSocket lỗi:",
+        error
+    );
+
+};
+
+socket.onclose = function () {
+
+    console.log(
+        "Customer WebSocket đã đóng"
+    );
+
+};
+
+</script>
 </body>
 </html>

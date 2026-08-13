@@ -39,27 +39,36 @@ let isFirstLoad = true;
 
 // AJAX Polling Logic for Dashboard
 function initDashboardPolling(contextPath) {
-    const pendingContainer = document.getElementById('pending-orders-list');
-    const makingContainer = document.getElementById('making-orders-list');
-    
-    if (!pendingContainer && !makingContainer) return; // Not on dashboard page
-    
-    // Initial load: collect existing order IDs from DOM
-    document.querySelectorAll('.order-card').forEach(card => {
-        const id = card.getAttribute('data-order-id');
-        if (id) knownOrderIds.add(parseInt(id));
-    });
-    isFirstLoad = false;
 
-    // Run polling every 5 seconds
-    setInterval(() => {
-        fetch(contextPath + '/api/barista/orders')
-            .then(res => res.json())
-            .then(data => {
-                updateDashboardDOM(data, contextPath);
-            })
-            .catch(err => console.error("Lỗi Polling dữ liệu đơn hàng: ", err));
-    }, 5000);
+    const pendingContainer =
+        document.getElementById('pending-orders-list');
+
+    const makingContainer =
+        document.getElementById('making-orders-list');
+
+    // Không phải Dashboard thì bỏ qua
+    if (!pendingContainer && !makingContainer) {
+        return;
+    }
+
+    // Load dữ liệu 1 lần khi mở Dashboard
+    fetch(contextPath + '/api/barista/orders')
+        .then(response => response.json())
+        .then(data => {
+
+            console.log("Load dashboard:", data);
+
+            updateDashboardDOM(data, contextPath);
+
+        })
+        .catch(error => {
+
+            console.error(
+                "Lỗi load dashboard:",
+                error
+            );
+
+        });
 }
 
 function updateDashboardDOM(data, contextPath) {
@@ -271,11 +280,31 @@ function escapeHtml(str) {
 
 // Initialize on DOM Content Loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if context path is available in window object
+
     const contextPath = window.contextPath || '';
-    
-    // Auto-activate features based on current DOM elements
+
+    // Load Dashboard 1 lần
     initDashboardPolling(contextPath);
+
+    // Countdown
+    initBrewCountdown();
+
+    // Enable notification sound sau khi user click
+    const unlockAudio = () => {
+
+        playNotificationSound();
+
+        document.removeEventListener(
+            'click',
+            unlockAudio
+        );
+    };
+
+    document.addEventListener(
+        'click',
+        unlockAudio
+    );
+});
     initBrewCountdown();
 
     // Enable play sound on first user click to bypass browser audio policies
@@ -284,4 +313,3 @@ document.addEventListener('DOMContentLoaded', () => {
         document.removeEventListener('click', unlockAudio);
     };
     document.addEventListener('click', unlockAudio);
-});

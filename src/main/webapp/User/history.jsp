@@ -9,7 +9,7 @@
 
 <meta charset="UTF-8">
 
-<title>User Management</title>
+<title>Lịch sử mua hàng</title>
 
 
 <link rel="stylesheet" href="dinh-dang.css">
@@ -308,10 +308,10 @@
 
             <div>
 
-                <h1>User Management</h1>
+                <h1>Lịch sử mua hàng</h1>
 
                 <p>
-                    Manage users of PolyCoffee
+                    ${sessionScope.user.userName}
                 </p>
 
             </div>
@@ -319,12 +319,7 @@
         </div>
 
 
-        <a class="btn-add"
-           href="${pageContext.request.contextPath}/UserList?action=add">
-
-            + Add User
-
-        </a>
+      
 
     </div>
 
@@ -341,17 +336,11 @@
 
                 <tr>
 
-                    <th>ID</th>
+                    <th>ID Bill</th>
 
-                    <th>Username</th>
+                    <th>Username</th>                    
 
-                    <th>Password</th>
-
-                    <th>Phone</th>
-
-                    <th>Email</th>
-
-                    <th>Role</th>
+                    <th>Total</th>
 
                     <th>Action</th>
 
@@ -370,73 +359,23 @@
 
                 <tr>
 
-                    <td class="user-id">
-                        ${u.userId}
+                    <td >
+                        ${u.billId}
                     </td>
 
                     <td>
-                        ${u.userName}
-                    </td>
-
-                    <td>
-                        ${u.password}
-                    </td>
-
-                    <td>
-                        ${u.userPhone}
-                    </td>
-                    <td>
-                    	${u.email}
+                        ${u.user.userName}
                     </td>
 
                     
 
                     <td>
 
-                        <c:choose>
-                            <c:when test="${u.role == 'Admin'}">
-                                <span class="role admin">
-                                    Admin
-                                </span>
-                            </c:when>
+                        ${u.total}
 
-                            <c:when test="${u.role == 'Employee'}">
-                                <span class="role employee">
-                                    Employee
-                                </span>
-                            </c:when>
+                    </td><td>
 
-                            <c:when test="${u.role == 'Customer'}">
-                                <span class="role customer">
-                                    Customer
-                                </span>
-                            </c:when>
-
-                            <c:otherwise>
-                                <span class="role">
-                                    ${u.role}
-                                </span>
-                            </c:otherwise>
-                        </c:choose>
-
-                    </td>
-
-                    <td>
-
-                        <div class="actions">
-
-                            <a class="btn-edit"
-                               href="${pageContext.request.contextPath}/UserList?action=UpdateUser&id=${u.userId}">
-                                Edit
-                            </a>
-
-                            <a class="btn-delete"
-                               href="${pageContext.request.contextPath}/UserList?action=DeleteUser&id=${u.userId}"
-                               onclick="return confirm('Bạn có chắc muốn xóa User này không?');">
-                                Delete
-                            </a>
-
-                        </div>
+                        ${u.status}
 
                     </td>
 
@@ -451,7 +390,7 @@
             <tr>
 
                 <td colspan="7" class="empty">
-                    ☕ Chưa có User nào trong hệ thống.
+                    ☕ Chưa có Đơn nào trong hệ thống.
                 </td>
 
             </tr>
@@ -473,13 +412,42 @@
 
     <div class="footer">
 
-        PolyCoffee • User Management
+        PolyCoffee • History
 
     </div>
 
 
 </div>
+<script type="text/javascript">
+const socket = new WebSocket(
+	    "ws://localhost:8080/PolyCoffee/websocket"
+	);
 
+	socket.onopen = function() {
+	    console.log("USER: WebSocket đã kết nối");
+	};
+
+	socket.onmessage = function(event) {
+	    console.log("USER: Server gửi:", event.data);
+
+	    if (event.data === "STATUS_CHANGED") {
+	        console.log("USER: Có thay đổi → F5");
+	        location.reload();
+	    }
+	};
+
+	socket.onerror = function(error) {
+	    console.error("USER: WebSocket ERROR:", error);
+	};
+
+	socket.onclose = function(event) {
+	    console.log(
+	        "USER: WebSocket CLOSED:",
+	        event.code,
+	        event.reason
+	    );
+	};
+</script>
 
 </body>
 

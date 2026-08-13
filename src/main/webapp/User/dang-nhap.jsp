@@ -31,6 +31,11 @@
                <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập...">
                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu...">	
                 <button type="submit" style="background-color: var(--dark-bg);">Đăng nhập</button>
+            <p style="margin-top: 10px; margin-bottom: 15px; font-size: 14px; text-align: right;">
+                    <a href="${pageContext.request.contextPath}/quen_mat_khau" style="color: #666; text-decoration: none;">Quên mật khẩu?</a>
+                </p>
+            
+            
             </form>
             
             <p style="margin-top: 15px; font-size: 14px;">

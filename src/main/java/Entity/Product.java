@@ -3,6 +3,9 @@ package Entity;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.apache.tomcat.jakartaee.commons.lang3.builder.EqualsExclude;
+import org.apache.tomcat.jakartaee.commons.lang3.builder.ToStringExclude;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,6 +42,8 @@ public class Product {
     private String drinkDescription;	
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @ToStringExclude
+    @EqualsAndHashCode.Exclude
     private List<BillDetail> billDetails;
     
     @OneToOne(mappedBy = "product",

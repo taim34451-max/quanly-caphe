@@ -23,7 +23,8 @@
             			<a href="${ctx }/DrinkServlet">QL Thực đơn</a>
 	                    
 	                    <a href="${ctx }/UserList">QL Nhân viên</a>
-	                    <a href="bao-cao-doanh-thu.jsp">Báo cáo</a>
+	                    <a href="${ctx }/Report">Báo cáo</a>
+	                    <a href="${ctx }/BillList">Đơn hàng</a>
 	                    <a>Xin chào, ${sessionScope.user.userName}</a>
 	                    <a href="${ctx}/Logout">Logout</a>
             		</c:when>
@@ -36,6 +37,7 @@
             			<a href="${ctx}/Menu">Thực đơn</a>
                     	<a href="${ctx}/cart">Giỏ hàng</a>
                     	<a>Xin chào, ${sessionScope.user.userName}</a>
+                    	<a href="${ctx}/History">Lịch sử mua hàng</a>
                     	<a href="${ctx}/Logout">Logout</a>
             		</c:when>
             		<c:otherwise>
@@ -44,7 +46,7 @@
 			            <span style="color: #fff; margin: 0 15px;">|</span>
 			            <a href="dang-ky.jsp" style="color: var(--primary-color); font-weight: bold;">Đăng ký</a>
 			            <a href="${ctx }/User/dang-nhap.jsp">Đăng nhập</a>
-			            <a href="">Quên mật khẩu</a>
+			            
             		</c:otherwise>
             	</c:choose>
             	

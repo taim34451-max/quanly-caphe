@@ -380,7 +380,7 @@ public class DrinkServlet extends HttpServlet {
                         		sz.setSizeS(new BigDecimal(priceS));
                         		sz.setSizeM(new BigDecimal(priceM));
                         		sz.setSizeL(new BigDecimal(priceL));
-                        		System.out.println(sz);
+                        	
                         		drink.setSizePrices(sz);
                         		
                         		}

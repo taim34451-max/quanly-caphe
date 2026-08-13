@@ -231,5 +231,41 @@
     </div>
     <script>window.contextPath = '${pageContext.request.contextPath}';</script>
     <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+    <script>
+
+const socket = new WebSocket(
+    "ws://localhost:8080/PolyCoffee/websocket"
+);
+
+
+socket.onopen = function() {
+
+    console.log("WebSocket Barista đã kết nối");
+
+};
+
+
+socket.onmessage = function(event) {
+
+    console.log(
+        "WebSocket nhận:",
+        event.data
+    );
+
+    const data = JSON.parse(event.data);
+
+    if (data.type === "NEW_ORDER") {
+
+        console.log(
+            "Có đơn hàng mới → reload"
+        );
+
+        location.reload();
+
+    }
+
+};
+
+</script>
 </body>
 </html>

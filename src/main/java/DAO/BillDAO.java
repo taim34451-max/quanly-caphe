@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import Entity.Bill;
+import Entity.Users;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -54,7 +55,7 @@ public class BillDAO {
 	
 	public void DeleteBill(String id) {
 		Bill exit = em.find(Bill.class, id);
-		String sql = "delete from Bill o where o.users.iduser like :id";
+		String sql = "delete from Bill o where o.user.userId = :id	";
 		String sql2 = "delete from BillDetail o where o.Bill.users.iduser like :id";
 		try {
 			em.getTransaction().begin();
@@ -76,6 +77,19 @@ public class BillDAO {
 				em.getTransaction().rollback();
 			}
 		}
+	}
+	
+	public List<Bill> FindByIdUser(int id) {
+		UserDAO dao = new UserDAO();
+		String sql = "select u from Bill u where u.user.userId = :id";
+		var exit = dao.findById(id);
+		if(exit!=null) {
+				
+				return em.createQuery(sql).setParameter("id", id).getResultList();
+			
+		}
+		return null;
+		
 	}
 	
 	
