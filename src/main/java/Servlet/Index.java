@@ -6,23 +6,22 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import DAO.DrinkDAO;
 import Entity.Product;
 
 /**
- * Servlet implementation class Menu
+ * Servlet implementation class Index
  */
-@WebServlet("/Menu/*")
-public class Menu extends HttpServlet {
+@WebServlet("/Index")
+public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Menu() {
+    public Index() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +32,11 @@ public class Menu extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		String cate = request.getParameter("cate");
 		DrinkDAO drinkDAO = new DrinkDAO();
-		List<Product> list = new ArrayList<Product>();
-		if(cate==null) {
-			
-				list = drinkDAO.findAll();
-		}
-		else {
-			list = drinkDAO.findByCate(cate);
-		}
-			
-	
-		
+		System.out.println("OK");
+		List<Product> list = drinkDAO.findAll();
 		request.setAttribute("listItem", list);
-		request.getRequestDispatcher("/thuc-don.jsp").forward(request, response);
+		request.getRequestDispatcher("/trang-chu.jsp").forward(request, response);
 	}
 
 	/**

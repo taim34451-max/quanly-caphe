@@ -16,7 +16,7 @@
             <div class="logo">Highlands Coffee</div>
             <!-- Dọn trống Nav, nhường quyền kiểm soát cho JavaScript -->
             <nav id="main-nav">
-            <a href="trang-chu.jsp" class="active">Trang chủ</a>
+            <a href="${ctx }/Index" class="active">Trang chủ</a>
             	<c:choose>
             		<c:when test="${sessionScope.user.role == 'ADMIN' }">
             

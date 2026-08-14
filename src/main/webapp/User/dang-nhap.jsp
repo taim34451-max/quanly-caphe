@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <a href="${pageContext.request.contextPath}/trang-chu.jsp" class="back-home">← Quay lại Trang chủ</a>
+    <a href="${pageContext.request.contextPath}/Index" class="back-home">← Quay lại Trang chủ</a>
 
     <div class="auth-container">
         <div class="form-box">

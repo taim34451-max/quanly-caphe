@@ -56,8 +56,8 @@ public class dang_nhap extends HttpServlet {
 			if(u.getPassword().equals(password)) {
 				System.out.println("OK");
 				AuthUtil.setUser(request, u);
-				request.getRequestDispatcher("//trang-chu.jsp").forward(request, response);
-	
+				request.getRequestDispatcher("/Index").forward(request, response);
+				return;
 			}
 			doGet(request, response);
 			}

@@ -22,6 +22,34 @@ public List<Product> findAll() {
 		List<Product> list = query.getResultList();
 		return list;
 	}
+
+public List<Product> findByCate(String cate){
+	String sql = "Select u from Product u where u.category like :cate";
+	TypedQuery<Product> query = em.createQuery(sql, Product.class);
+	System.out.println(cate);
+	Object x;
+	switch (cate) {
+	case "caphe": {
+		 x = "Cà Phê";
+		 break;
+	}
+	case "tra":{
+		 x = "Trà";
+		 break;
+	}
+	case"freeze":{
+		 x = "Freeze";
+		 break;
+	}
+	
+	default:
+		 x = "Bánh";
+	}
+	
+	
+	query.setParameter("cate", x);
+	return query.getResultList();
+}
 	
 	public Product FindByID(int id) {
 		return em.find(Product.class, id);
@@ -54,7 +82,6 @@ public List<Product> findAll() {
 	
 	public void DeleteProduct(int id) {
 		Product exit = em.find(Product.class, id);
-		String sql = "delete from Bill o where o.users.iduser like :id";
 		if (exit != null) {
 
             try {

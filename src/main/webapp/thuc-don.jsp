@@ -24,11 +24,11 @@
 
         <!-- THANH NÚT LỌC SẢN PHẨM -->
         <div class="filter-bar">
-            <a href="#tat-ca" class="btn-filter">Tất cả</a>
-            <a href="#ca-phe" class="btn-filter">Cà Phê Phin</a>
-            <a href="#tra" class="btn-filter">Trà Highlands</a>
-            <a href="#freeze" class="btn-filter">Đá Xay (Freeze)</a>
-            <a href="#banh-mi" class="btn-filter">Bánh Mì & Snack</a>
+            <a href="${ctx }/Menu" class="btn-filter">Tất cả</a>
+            <a href="${ctx }/Menu?cate=caphe" class="btn-filter">Cà Phê Phin</a>
+            <a href="${ctx }/Menu?cate=tra" class="btn-filter">Trà Highlands</a>
+            <a href="${ctx }/Menu?cate=freeze" class="btn-filter">Đá Xay (Freeze)</a>
+            <a href="${ctx }/Menu?cate=allbanh-mi" class="btn-filter">Bánh Mì & Snack</a>
         </div>
         <div class="products">
         <c:forEach var="u" items="${listItem}">
