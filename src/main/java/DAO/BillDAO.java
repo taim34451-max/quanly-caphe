@@ -21,6 +21,12 @@ public class BillDAO {
 
     }
     
+    public Bill findByBillId(Object id) {
+    	return em.find(Bill.class, id);
+    	
+    	
+    }
+    
 	public boolean createBill(Bill bill) {
 
         try {
